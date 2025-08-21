@@ -18,8 +18,6 @@ model User {
   id              Int      @id @default(autoincrement())
   email           String   @unique @db.VarChar(255)
   files           File[]
-  firstName       String? @db.VarChar(100)
-  lastName        String? @db.VarChar(100)
   chargeSessions  ChargeSession[]
   privateStations ChargeStation[]
 
