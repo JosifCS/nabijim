@@ -12,6 +12,22 @@
 			"totalCostDesc": "průměr {averageCost, number, ::.00} Kč/kWh",
 			"thisMonth": "Tento měsíc",
 			"thisMonthDesc": "za {thisMonthCost, number, ::.00} Kč"
+		},
+		"RecentChargings": {
+			"lastCharging": "Poslední nabíjení",
+			"noCharging": "Zatím nemáte žádná zaznamenána nabíjení",
+			"help": "Klikněte na tlačítko \"Zaznamenat nabíjení\" pro přidání prvního záznamu.",
+			"count": "Přehled posledních {count} nabíjecích relací",
+			"duration": "Doba dobíjení",
+			"pricePerKwh": "Cena za jednu kWh",
+			"totalEnergy": "Celková odebraná energie",
+			"totalCost": "Celková cena",
+			"chargingTime": "Čas dobíjení od - do",
+			"date": "Datum dobíjení",
+			"provider": "Poskytovatel dobíjení"
 		}
+	},
+	"Dashboard": {
+		"recordCharging": "Zaznamenat nabíjení"
 	}
 }

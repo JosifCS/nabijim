@@ -12,6 +12,22 @@
 			"totalCountDesc": "charging sessions",
 			"totalEnergy": "Total energy",
 			"totalEnergyDesc": "charged"
+		},
+		"RecentChargings": {
+			"lastCharging": "Last charging",
+			"noCharging": "You have no recorded charges yet",
+			"help": "Click the \"Record charging\" button to add the first record.",
+			"count": "Overview of the last {count} charging sessions",
+			"duration": "Recharging time",
+			"pricePerKwh": "Price per kWh",
+			"totalEnergy": "Total energy consumed",
+			"totalCost": "Total price",
+			"chargingTime": "Charging time from - to",
+			"date": "Recharge date",
+			"provider": "Recharge provider"
 		}
+	},
+	"Dashboard": {
+		"recordCharging": "Record charging"
 	}
 }
