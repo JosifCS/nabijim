@@ -25,6 +25,9 @@
 			"chargingTime": "Čas dobíjení od - do",
 			"date": "Datum dobíjení",
 			"provider": "Poskytovatel dobíjení"
+		},
+		"Header": {
+			"login": "Přihlásit se"
 		}
 	},
 	"Dashboard": {

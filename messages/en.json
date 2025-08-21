@@ -25,6 +25,9 @@
 			"chargingTime": "Charging time from - to",
 			"date": "Recharge date",
 			"provider": "Recharge provider"
+		},
+		"Header": {
+			"login": "Sign in"
 		}
 	},
 	"Dashboard": {
