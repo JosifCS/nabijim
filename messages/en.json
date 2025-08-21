@@ -1,5 +1,17 @@
 {
-  "HomePage": {
-    "title": "Hello world!"
-  }
+	"HomePage": {
+		"title": "Hello world!"
+	},
+	"Components": {
+		"ChargingStats": {
+			"totalCount": "Total charging",
+			"totalCost": "Total costs",
+			"totalCostDesc": "average {averageCost, number, ::.00} CZK/kWh",
+			"thisMonth": "This month",
+			"thisMonthDesc": "for {thisMonthCost, number, ::.00} CZK",
+			"totalCountDesc": "charging sessions",
+			"totalEnergy": "Total energy",
+			"totalEnergyDesc": "charged"
+		}
+	}
 }

@@ -1,5 +1,17 @@
 {
-  "HomePage": {
-    "title": "Ahoj světe!"
-  }
+	"HomePage": {
+		"title": "Ahoj světe!"
+	},
+	"Components": {
+		"ChargingStats": {
+			"totalCount": "Celkem nabíjení",
+			"totalCountDesc": "nabíjecích relací",
+			"totalEnergy": "Celková energie",
+			"totalEnergyDesc": "nabito",
+			"totalCost": "Celkové náklady",
+			"totalCostDesc": "průměr {averageCost, number, ::.00} Kč/kWh",
+			"thisMonth": "Tento měsíc",
+			"thisMonthDesc": "za {thisMonthCost, number, ::.00} Kč"
+		}
+	}
 }
