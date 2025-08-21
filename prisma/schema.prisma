@@ -13,3 +13,78 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id              Int      @id @default(autoincrement())
+  email           String   @unique @db.VarChar(255)
+  files           File[]
+  firstName       String? @db.VarChar(100)
+  lastName        String? @db.VarChar(100)
+  chargeSessions  ChargeSession[]
+  privateStations ChargeStation[]
+
+  @@map("users")
+}
+
+model File {
+    id              Int       @id @default(autoincrement())
+    name            String
+    uuid            String
+    type            String
+    path            String
+    createdAt       DateTime  @default(now())
+    createdBy       User      @relation(fields: [createdById], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    createdById     Int
+    chargeSession   ChargeSession? @relation(name:"ChargeSessionFile")
+    chargeSessionId Int?
+    
+    @@map("files")
+}
+
+model ChargeSession {
+  id          Int       @id @default(autoincrement())
+  user        User @relation(fields: [UserId], references: [id])
+  UserId      Int
+  station     ChargeStation @relation(fields: [stationId], references: [id])
+  stationId   Int
+  provider    Provider @relation(fields: [providerId], references: [id])
+  providerId  Int
+  description String
+  extraFees   Float
+  startTime   DateTime
+  endTime     DateTime
+  kwh         Float
+  price       Float
+  dc          Boolean
+  invoice     File? @relation("ChargeSessionFile", fields: [invoiceId], references: [id])
+  invoiceId   Int?  @unique
+
+  @@map("chargeSession")
+}
+
+model ChargeStation {
+  id              Int @id @default(autoincrement())
+  name            String
+  customName      String?
+  provider        Provider? @relation(fields: [providerId], references: [id])
+  providerId      Int?
+  user            User? @relation(fields: [userId], references: [id])
+  userId          Int?
+  city            String?
+  street          String?
+  streetNumber    Int?
+  houseNumber     Int?
+  chargeSessions  ChargeSession[]
+
+  @@map("chargeStations")
+}
+
+model Provider {
+  id              Int @id @default(autoincrement())
+  name            String
+  description     String?
+  stations        ChargeStation[]
+  chargeSessions  ChargeSession[]
+
+  @@map("providers")
+}
