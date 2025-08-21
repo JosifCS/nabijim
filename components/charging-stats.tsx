@@ -1,6 +1,7 @@
 import { TrendingUp, Zap, Euro, Calendar } from "lucide-react"
 import { StatCard, StatCardSkeleton } from "./stat-card"
 import { getTranslations } from "next-intl/server"
+import { useTranslations } from "next-intl"
 
 export async function ChargingStats() {
 	const t = await getTranslations("Components.ChargingStats")
@@ -48,8 +49,8 @@ export async function ChargingStats() {
 	)
 }
 
-export async function ChargingStatsSkeleton() {
-	const t = await getTranslations("Components.ChargingStats")
+export function ChargingStatsSkeleton() {
+	const t = useTranslations("Components.ChargingStats")
 
 	return (
 		<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
