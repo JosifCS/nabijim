@@ -1,0 +1,22 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.tabSize": 4,
+  "editor.insertSpaces": false,
+
+  "explorer.confirmDelete": false,
+
+  "prettier.tabWidth": 4,
+  "prettier.useTabs": true,
+  "prettier.semi": false,
+
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.dirStructure": "file",
+  "i18n-ally.enabledFrameworks": ["next-intl"],
+  "i18n-ally.localesPaths": "messages",
+  "i18n-ally.sourceLanguage": "cs",
+  "i18n-ally.editor.preferEditor": true,
+  "i18n-ally.tabStyle": "tab",
+  "i18n-ally.annotationInPlace": true,
+  "i18n-ally.displayLanguage": "cs"
+}
