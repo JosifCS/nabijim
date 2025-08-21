@@ -1,9 +1,10 @@
 import { TrendingUp, Zap, Euro, Calendar } from "lucide-react"
 import { StatCard, StatCardSkeleton } from "./stat-card"
-import { getTranslations } from "next-intl/server"
+import { getLocale, getTranslations } from "next-intl/server"
 import { useTranslations } from "next-intl"
 
 export async function ChargingStats() {
+	const locale = await getLocale()
 	const t = await getTranslations("Components.ChargingStats")
 
 	const totalCount = 1,
@@ -31,7 +32,7 @@ export async function ChargingStats() {
 
 			<StatCard
 				label={t("totalCost")}
-				value={totalCost.toLocaleString("cs", {
+				value={totalCost.toLocaleString(locale, {
 					style: "currency",
 					currency: "CZK",
 				})}
