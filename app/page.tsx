@@ -1,5 +1,5 @@
+import { ButtonLink } from "@/components/button-link"
 import { InfoCard } from "@/components/info-card"
-import { Button } from "@/components/ui/button"
 import {
 	BarChart3,
 	Clock,
@@ -29,13 +29,13 @@ export default function Page() {
 				<p className="text-xl text-emerald-700 dark:text-emerald-300 mb-8 max-w-3xl mx-auto">
 					{t("description")}
 				</p>
-				<Button
-					//onClick={onLogin}
+				<ButtonLink
+					href="/dashboard"
 					size="lg"
-					className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+					className="px-8 py-4 text-lg"
 				>
 					{t("begin")}
-				</Button>
+				</ButtonLink>
 			</div>
 
 			<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">

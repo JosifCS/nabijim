@@ -42,11 +42,7 @@ export async function Header() {
 								}}
 							/>
 						) : (
-							<ButtonLink
-								href="/auth/login"
-								size="sm"
-								className="bg-emerald-600 hover:bg-emerald-700 text-white"
-							>
+							<ButtonLink href="/auth/login" size="sm">
 								<User className="h-4 w-4 mr-2" />
 								{t("login")}
 							</ButtonLink>

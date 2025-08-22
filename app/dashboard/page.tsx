@@ -13,7 +13,7 @@ export default async function Page() {
 				<Button
 					// onClick={() => setShowAddDialog(true)}
 					size="lg"
-					className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+					className="px-8 py-4 text-lg font-semibold"
 				>
 					<Plus className="h-6 w-6 mr-2" />
 					{t("recordCharging")}
