@@ -2,11 +2,10 @@
 
 import { useId } from "react"
 import { useFormContext } from "./form"
-import { Input } from "./ui/input"
 import { Label } from "./ui/label"
-import { Textarea } from "./ui/textarea"
 import { Skeleton } from "./ui/skeleton"
 import { cx } from "class-variance-authority"
+import { Textarea } from "./ui/textarea"
 
 type FormTextAreaProps = React.InputHTMLAttributes<HTMLTextAreaElement> & {
 	label?: string
