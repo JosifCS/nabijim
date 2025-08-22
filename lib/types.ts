@@ -15,8 +15,8 @@ export type Translations = Awaited<ReturnType<typeof getTranslations>>
  * //   searchParams: Promise<Record<string, string | string[] | undefined>>;
  * // }
  */
-export type PageProps<KEYS extends keyof any = string> = {
-	params: Promise<Readonly<{ [P in KEYS]: string }>>
+export type PageProps = {
+	params: Promise<Readonly<{ [P in string]: string }>>
 	searchParams: Promise<
 		Readonly<Record<string, string | string[] | undefined>>
 	>

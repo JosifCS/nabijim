@@ -1,5 +1,4 @@
-import { Globe, LogOut, User, Zap } from "lucide-react"
-import { Button } from "./ui/button"
+import { User, Zap } from "lucide-react"
 import { getLocale, getTranslations } from "next-intl/server"
 import { ButtonLink } from "./button-link"
 import { auth0 } from "@/lib/auth0"
