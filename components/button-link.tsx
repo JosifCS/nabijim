@@ -16,7 +16,7 @@ export function ButtonLink({
 	...props
 }: ButtonLinkProps) {
 	return (
-		<Button {...props}>
+		<Button {...props} asChild>
 			<Link href={href} target={target}>
 				{children}
 			</Link>
