@@ -1,4 +1,4 @@
-import { authorize } from "@/utils/auth"
+import { authorize } from "@/modules/auth"
 import type { Metadata } from "next"
 import { ReactNode } from "react"
 

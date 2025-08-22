@@ -1,6 +1,6 @@
+import { auth0 } from "@/lib/auth0"
+import prisma from "@/lib/prisma"
 import { redirect } from "next/navigation"
-import { auth0 } from "./auth0"
-import prisma from "./prisma"
 
 export async function authorize() {
 	const session = await auth0.getSession()

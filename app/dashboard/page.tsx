@@ -1,10 +1,7 @@
 import { ChargingStats } from "@/components/charging-stats"
-import {
-	RecentChargings,
-	RecentChargingsSkeleton,
-} from "@/components/recent-chargings"
+import { RecentChargings } from "@/components/recent-chargings"
 import { Button } from "@/components/ui/button"
-import { Plus, Zap } from "lucide-react"
+import { Plus } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
 export default async function Page() {
