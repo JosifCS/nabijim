@@ -56,5 +56,15 @@
 		"optimalizationDesc": "Najděte nejlevnější způsoby nabíjení a ušetřete peníze",
 		"overview": "Přehled spotřeby",
 		"overviewDesc": "Mějte jasný přehled o své spotřebě energie a jízdních návycích"
+	},
+	"User": {
+		"Settings": {
+			"settings": "Nastavení",
+			"chargeDescription": "Přidejte svou domací nabíjecí stanici a další soukromé stanice.",
+			"description": "Spravujte své stanice, ceny nabíjení a další",
+			"stations": "Vlastní nabíjecí stanice",
+			"noStations": "Zatím nemáte žádné vlastní nabíjecí stanice",
+			"addStation": "Přidat stanici"
+		}
 	}
 }
