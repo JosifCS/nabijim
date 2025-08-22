@@ -18,7 +18,10 @@ import { SafeActionResult } from "@/modules/safe-action"
 import { Skeleton } from "./ui/skeleton"
 
 type FormWrapper = {
-	action: any
+	action: (
+		currentState: object,
+		formData: FormData
+	) => Promise<SafeActionResult>
 	children: React.ReactNode
 	className?: string
 	autoSave?: boolean
@@ -51,16 +54,13 @@ export function Form({
 	}, 3000)
 
 	const [unsaved, setUnsaved] = useState(false)
-	const [state, formAction, isPending] = useActionState<SafeActionResult>(
-		action,
-		{
-			prevState: null,
-			validationErrors: {},
-			result: {
-				success: true,
-			},
-		}
-	)
+	const [state, formAction, isPending] = useActionState(action, {
+		prevState: null,
+		validationErrors: {},
+		result: {
+			success: true,
+		},
+	})
 
 	const handleChange = useCallback(() => {
 		if (autoSave) {
