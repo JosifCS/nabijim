@@ -40,20 +40,19 @@ model File {
 }
 
 model ChargeSession {
-  id          Int       @id @default(autoincrement())
-  user        User @relation(fields: [UserId], references: [id])
-  UserId      Int
-  station     ChargeStation @relation(fields: [stationId], references: [id])
-  stationId   Int
+  id          Int  @id @default(autoincrement())
+  user        User @relation(fields: [userId], references: [id])
+  userId      Int
+  connector   ChargeConnector @relation(fields: [connectorId], references: [id])
+  connectorId Int
   provider    Provider @relation(fields: [providerId], references: [id])
   providerId  Int
-  description String
+  description String?
   extraFees   Float
-  startTime   DateTime
-  endTime     DateTime
+  startTime   String?
+  endTime     String?
   kwh         Float
   price       Float
-  dc          Boolean
   invoice     File? @relation("ChargeSessionFile", fields: [invoiceId], references: [id])
   invoiceId   Int?  @unique
 
@@ -72,9 +71,45 @@ model ChargeStation {
   street          String?
   streetNumber    Int?
   houseNumber     Int?
-  chargeSessions  ChargeSession[]
+  connectors      ChargeConnector[]
 
   @@map("chargeStations")
+}
+
+model ChargeConnector {
+  id              Int @id @default(autoincrement())
+  dc              Boolean
+  name            String?
+  chargeSessions  ChargeSession[]
+  station         ChargeStation @relation(fields: [stationId], references: [id])
+  stationId       Int
+  tariffs         ChargeTariff[]
+
+  @@map("chargeConnectors")
+}
+
+model ChargeTariff {
+  id              Int @id @default(autoincrement())
+  name            String?
+  validFrom DateTime
+  validTo DateTime?
+  times ChargeTariffTime[]
+  connector ChargeConnector @relation(fields: [connectorId], references: [id])
+  connectorId Int
+
+  @@map("chargeTariffs")
+}
+
+model ChargeTariffTime {
+  id        Int @id @default(autoincrement())
+  days      Int[]
+  from      String
+  to        String
+  price     Float
+  tariff    ChargeTariff @relation(fields: [tariffId], references: [id])
+  tariffId  Int
+
+  @@map("chargeTariffTimes")
 }
 
 model Provider {

@@ -2,8 +2,6 @@
 CREATE TABLE "public"."users" (
     "id" SERIAL NOT NULL,
     "email" VARCHAR(255) NOT NULL,
-    "firstName" VARCHAR(100),
-    "lastName" VARCHAR(100),
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );
@@ -25,16 +23,15 @@ CREATE TABLE "public"."files" (
 -- CreateTable
 CREATE TABLE "public"."chargeSession" (
     "id" SERIAL NOT NULL,
-    "UserId" INTEGER NOT NULL,
-    "stationId" INTEGER NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "connectorId" INTEGER NOT NULL,
     "providerId" INTEGER NOT NULL,
-    "description" TEXT NOT NULL,
+    "description" TEXT,
     "extraFees" DOUBLE PRECISION NOT NULL,
-    "startTime" TIMESTAMP(3) NOT NULL,
-    "endTime" TIMESTAMP(3) NOT NULL,
+    "startTime" TEXT,
+    "endTime" TEXT,
     "kwh" DOUBLE PRECISION NOT NULL,
     "price" DOUBLE PRECISION NOT NULL,
-    "dc" BOOLEAN NOT NULL,
     "invoiceId" INTEGER,
 
     CONSTRAINT "chargeSession_pkey" PRIMARY KEY ("id")
@@ -56,6 +53,39 @@ CREATE TABLE "public"."chargeStations" (
 );
 
 -- CreateTable
+CREATE TABLE "public"."chargeConnectors" (
+    "id" SERIAL NOT NULL,
+    "dc" BOOLEAN NOT NULL,
+    "name" TEXT,
+    "stationId" INTEGER NOT NULL,
+
+    CONSTRAINT "chargeConnectors_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "public"."chargeTariffs" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT,
+    "validFrom" TIMESTAMP(3) NOT NULL,
+    "validTo" TIMESTAMP(3),
+    "connectorId" INTEGER NOT NULL,
+
+    CONSTRAINT "chargeTariffs_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "public"."chargeTariffTimes" (
+    "id" SERIAL NOT NULL,
+    "days" INTEGER[],
+    "from" TEXT NOT NULL,
+    "to" TEXT NOT NULL,
+    "price" DOUBLE PRECISION NOT NULL,
+    "tariffId" INTEGER NOT NULL,
+
+    CONSTRAINT "chargeTariffTimes_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "public"."providers" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
@@ -74,10 +104,10 @@ CREATE UNIQUE INDEX "chargeSession_invoiceId_key" ON "public"."chargeSession"("i
 ALTER TABLE "public"."files" ADD CONSTRAINT "files_createdById_fkey" FOREIGN KEY ("createdById") REFERENCES "public"."users"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE "public"."chargeSession" ADD CONSTRAINT "chargeSession_UserId_fkey" FOREIGN KEY ("UserId") REFERENCES "public"."users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."chargeSession" ADD CONSTRAINT "chargeSession_userId_fkey" FOREIGN KEY ("userId") REFERENCES "public"."users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."chargeSession" ADD CONSTRAINT "chargeSession_stationId_fkey" FOREIGN KEY ("stationId") REFERENCES "public"."chargeStations"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."chargeSession" ADD CONSTRAINT "chargeSession_connectorId_fkey" FOREIGN KEY ("connectorId") REFERENCES "public"."chargeConnectors"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "public"."chargeSession" ADD CONSTRAINT "chargeSession_providerId_fkey" FOREIGN KEY ("providerId") REFERENCES "public"."providers"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -90,3 +120,12 @@ ALTER TABLE "public"."chargeStations" ADD CONSTRAINT "chargeStations_providerId_
 
 -- AddForeignKey
 ALTER TABLE "public"."chargeStations" ADD CONSTRAINT "chargeStations_userId_fkey" FOREIGN KEY ("userId") REFERENCES "public"."users"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "public"."chargeConnectors" ADD CONSTRAINT "chargeConnectors_stationId_fkey" FOREIGN KEY ("stationId") REFERENCES "public"."chargeStations"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "public"."chargeTariffs" ADD CONSTRAINT "chargeTariffs_connectorId_fkey" FOREIGN KEY ("connectorId") REFERENCES "public"."chargeConnectors"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "public"."chargeTariffTimes" ADD CONSTRAINT "chargeTariffTimes_tariffId_fkey" FOREIGN KEY ("tariffId") REFERENCES "public"."chargeTariffs"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
