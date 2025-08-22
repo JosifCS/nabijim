@@ -1,11 +1,13 @@
 import { Globe, LogOut, User, Zap } from "lucide-react"
 import { Button } from "./ui/button"
-import { getTranslations } from "next-intl/server"
+import { getLocale, getTranslations } from "next-intl/server"
 import { ButtonLink } from "./button-link"
 import { auth0 } from "@/lib/auth0"
+import { LocaleSelect } from "./locale-select"
 
 export async function Header() {
 	const session = await auth0.getSession()
+	const locale = await getLocale()
 	const t = await getTranslations("Components.Header")
 
 	return (
@@ -22,14 +24,10 @@ export async function Header() {
 					</div>
 
 					<div className="flex items-center gap-3">
-						<Button
-							variant="outline"
-							size="sm"
-							className="border-emerald-300 text-emerald-700 hover:bg-emerald-50 dark:border-emerald-700 dark:text-emerald-300 dark:hover:bg-emerald-900 bg-transparent"
-						>
-							<Globe className="h-4 w-4 mr-2" />
-							CZ
-						</Button>
+						<LocaleSelect
+							locale={locale}
+							label={t("localeSelect")}
+						/>
 						{session ? (
 							<ButtonLink
 								href="/auth/logout"

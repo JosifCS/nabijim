@@ -25,7 +25,8 @@
 		},
 		"Header": {
 			"login": "Přihlásit se",
-			"logout": "Odhlásti se"
+			"logout": "Odhlásti se",
+			"localeSelect": "Výběr jazyka"
 		}
 	},
 	"Dashboard": {

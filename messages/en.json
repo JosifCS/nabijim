@@ -25,7 +25,8 @@
 		},
 		"Header": {
 			"login": "Sign in",
-			"logout": "Log out"
+			"logout": "Log out",
+			"localeSelect": "Language selection"
 		}
 	},
 	"Dashboard": {
