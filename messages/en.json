@@ -1,7 +1,4 @@
 {
-	"HomePage": {
-		"title": "Hello world!"
-	},
 	"Components": {
 		"ChargingStats": {
 			"totalCount": "Total charging",
@@ -32,5 +29,28 @@
 	},
 	"Dashboard": {
 		"recordCharging": "Record charging"
+	},
+	"Index": {
+		"description": "Simple and efficient recording of your electric vehicle charging. Create clear statistics on consumption and charging costs.",
+		"begin": "Start tracking charging",
+		"homeTitle": "Home charging",
+		"homeDesc": "Record charging at home with your own price per kWh",
+		"costControl": "Cost control",
+		"costDesc": "Track how much you actually spend on charging and compare different tariffs",
+		"fastDesc": "Pre-set prices for quick and easy use",
+		"fastTitle": "Quick recording",
+		"mailDesc": "Automatic import of charging invoices directly from email",
+		"mailTitle": "Import invoices",
+		"optimalization": "Optimization",
+		"optimalizationDesc": "Find the cheapest ways to charge and save money",
+		"overview": "Consumption overview",
+		"publicDesc": "Monitor charging on AC, DC fast chargers and premium networks",
+		"overviewDesc": "Get a clear overview of your energy consumption and driving habits",
+		"publicTitle": "Public chargers",
+		"statsTitle": "Detailed statistics",
+		"statsDesc": "Clear graphs of consumption, costs and charging trends",
+		"trendsDesc": "Monitor price trends and optimize your charging",
+		"trendsTitle": "Trend analysis",
+		"whyUse": "Why monitor charging?"
 	}
 }

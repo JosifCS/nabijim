@@ -1,103 +1,121 @@
-import Image from "next/image";
+import { InfoCard } from "@/components/info-card"
+import { Button } from "@/components/ui/button"
+import {
+	BarChart3,
+	Clock,
+	Euro,
+	Home,
+	Mail,
+	MapPin,
+	TrendingUp,
+	Zap,
+} from "lucide-react"
+import { useTranslations } from "next-intl"
 
-export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+export default function Page() {
+	const t = useTranslations("Index")
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+	return (
+		<div className="container mx-auto px-4 py-12 max-w-6xl">
+			<div className="text-center mb-16">
+				<div className="flex justify-center mb-6">
+					<div className="p-4 bg-emerald-600 rounded-full">
+						<Zap className="h-12 w-12 text-white" />
+					</div>
+				</div>
+				<h1 className="text-5xl font-bold text-emerald-800 dark:text-emerald-200 mb-6">
+					Nabíjím.to
+				</h1>
+				<p className="text-xl text-emerald-700 dark:text-emerald-300 mb-8 max-w-3xl mx-auto">
+					{t("description")}
+				</p>
+				<Button
+					//onClick={onLogin}
+					size="lg"
+					className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+				>
+					{t("begin")}
+				</Button>
+			</div>
+
+			<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+				<InfoCard
+					icon={<Home />}
+					title={t("homeTitle")}
+					description={t("homeDesc")}
+				/>
+
+				<InfoCard
+					icon={<MapPin />}
+					title={t("publicTitle")}
+					description={t("publicDesc")}
+				/>
+
+				<InfoCard
+					icon={<Mail />}
+					title={t("mailTitle")}
+					description={t("mailDesc")}
+				/>
+
+				<InfoCard
+					icon={<BarChart3 />}
+					title={t("statsTitle")}
+					description={t("statsDesc")}
+				/>
+
+				<InfoCard
+					icon={<TrendingUp />}
+					title={t("trendsTitle")}
+					description={t("trendsDesc")}
+				/>
+
+				<InfoCard
+					icon={<Clock />}
+					title={t("fastTitle")}
+					description={t("fastDesc")}
+				/>
+			</div>
+
+			<div className="bg-white/60 dark:bg-gray-900/60 backdrop-blur-sm rounded-2xl p-8 border border-emerald-200 dark:border-emerald-800">
+				<h2 className="text-3xl font-bold text-emerald-800 dark:text-emerald-200 text-center mb-8">
+					{t("whyUse")}
+				</h2>
+				<div className="grid md:grid-cols-3 gap-8">
+					<div className="text-center">
+						<div className="p-3 bg-emerald-100 dark:bg-emerald-900 rounded-full w-fit mx-auto mb-4">
+							<Euro className="h-8 w-8 text-emerald-600 dark:text-emerald-400" />
+						</div>
+						<h3 className="text-xl font-semibold text-emerald-800 dark:text-emerald-200 mb-2">
+							{t("costControl")}
+						</h3>
+						<p className="text-emerald-600 dark:text-emerald-400">
+							{t("costDesc")}
+						</p>
+					</div>
+					<div className="text-center">
+						<div className="p-3 bg-emerald-100 dark:bg-emerald-900 rounded-full w-fit mx-auto mb-4">
+							<TrendingUp className="h-8 w-8 text-emerald-600 dark:text-emerald-400" />
+						</div>
+						<h3 className="text-xl font-semibold text-emerald-800 dark:text-emerald-200 mb-2">
+							{t("optimalization")}
+						</h3>
+						<p className="text-emerald-600 dark:text-emerald-400">
+							{t("optimalizationDesc")}
+						</p>
+					</div>
+					<div className="text-center">
+						<div className="p-3 bg-emerald-100 dark:bg-emerald-900 rounded-full w-fit mx-auto mb-4">
+							<BarChart3 className="h-8 w-8 text-emerald-600 dark:text-emerald-400" />
+						</div>
+						<h3 className="text-xl font-semibold text-emerald-800 dark:text-emerald-200 mb-2">
+							{t("overview")}
+						</h3>
+						<p className="text-emerald-600 dark:text-emerald-400">
+							{t("overviewDesc")}
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	)
 }

@@ -1,7 +1,4 @@
 {
-	"HomePage": {
-		"title": "Ahoj světe!"
-	},
 	"Components": {
 		"ChargingStats": {
 			"totalCount": "Celkem nabíjení",
@@ -32,5 +29,28 @@
 	},
 	"Dashboard": {
 		"recordCharging": "Zaznamenat nabíjení"
+	},
+	"Index": {
+		"description": "Jednoduché a efektivní zaznamenávání nabíjení vašeho elektromobilu. Vytvářejte si přehledné statistiky o spotřebě a cenách nabíjení.",
+		"begin": "Začít sledovat nabíjení",
+		"homeTitle": "Domácí nabíjení",
+		"homeDesc": "Zaznamenávejte nabíjení doma s vlastní cenou za kWh",
+		"publicTitle": "Veřejné nabíječky",
+		"publicDesc": "Sledujte nabíjení na AC, DC rychlonabíječkách i prémiových sítích",
+		"mailTitle": "Import faktur",
+		"mailDesc": "Automatický import faktur za nabíjení přímo z emailu",
+		"statsTitle": "Detailní statistiky",
+		"statsDesc": "Přehledné grafy spotřeby, nákladů a trendů nabíjení",
+		"trendsTitle": "Analýza trendů",
+		"trendsDesc": "Sledujte vývoj cen a optimalizujte své nabíjení",
+		"fastTitle": "Rychlé zaznamenání",
+		"fastDesc": "Přednastavené ceny pro rychlé a snadné použití",
+		"whyUse": "Proč sledovat nabíjení?",
+		"costControl": "Kontrola nákladů",
+		"costDesc": "Sledujte, kolik skutečně utratíte za nabíjení a porovnávejte různé tarify",
+		"optimalization": "Optimalizace",
+		"optimalizationDesc": "Najděte nejlevnější způsoby nabíjení a ušetřete peníze",
+		"overview": "Přehled spotřeby",
+		"overviewDesc": "Mějte jasný přehled o své spotřebě energie a jízdních návycích"
 	}
 }
