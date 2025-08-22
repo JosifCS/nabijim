@@ -58,8 +58,7 @@ export function FormSelect({
 					{options.map((x) => (
 						<SelectItem key={x.value} value={x.value}>
 							{
-								// eslint-disable-line @typescript-eslint/no-explicit-any
-								x.label ?? (t ? t(x.value as any) : x.value)
+								x.label ?? (t ? t(x.value as any) : x.value) // eslint-disable-line @typescript-eslint/no-explicit-any
 							}
 						</SelectItem>
 					))}
