@@ -4,6 +4,7 @@ import "./globals.css"
 import { getLocale } from "next-intl/server"
 import { ReactNode } from "react"
 import { Header } from "@/components/header"
+import { Toaster } from "@/components/ui/sonner"
 
 // inicializace konstant
 String.Empty = ""
@@ -43,6 +44,8 @@ export default async function RootLayout({
 				<div className="pt-16 min-h-screen bg-gradient-to-br from-emerald-50 to-green-100 dark:from-emerald-950 dark:to-green-900">
 					{children}
 				</div>
+
+				<Toaster />
 			</body>
 		</html>
 	)
