@@ -24,7 +24,8 @@
 			"provider": "Recharge provider"
 		},
 		"Header": {
-			"login": "Sign in"
+			"login": "Sign in",
+			"logout": "Log out"
 		}
 	},
 	"Dashboard": {

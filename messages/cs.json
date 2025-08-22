@@ -24,7 +24,8 @@
 			"provider": "Poskytovatel dobíjení"
 		},
 		"Header": {
-			"login": "Přihlásit se"
+			"login": "Přihlásit se",
+			"logout": "Odhlásti se"
 		}
 	},
 	"Dashboard": {

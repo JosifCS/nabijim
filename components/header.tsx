@@ -1,9 +1,11 @@
-import { Globe, User, Zap } from "lucide-react"
+import { Globe, LogOut, User, Zap } from "lucide-react"
 import { Button } from "./ui/button"
 import { getTranslations } from "next-intl/server"
 import { ButtonLink } from "./button-link"
+import { auth0 } from "@/lib/auth0"
 
 export async function Header() {
+	const session = await auth0.getSession()
 	const t = await getTranslations("Components.Header")
 
 	return (
@@ -28,14 +30,25 @@ export async function Header() {
 							<Globe className="h-4 w-4 mr-2" />
 							CZ
 						</Button>
-						<ButtonLink
-							href="/auth/login"
-							size="sm"
-							className="bg-emerald-600 hover:bg-emerald-700 text-white"
-						>
-							<User className="h-4 w-4 mr-2" />
-							{t("login")}
-						</ButtonLink>
+						{session ? (
+							<ButtonLink
+								href="/auth/logout"
+								size="sm"
+								className="bg-emerald-600 hover:bg-emerald-700 text-white"
+							>
+								<LogOut className="h-4 w-4 mr-2" />
+								{t("logout")}
+							</ButtonLink>
+						) : (
+							<ButtonLink
+								href="/auth/login"
+								size="sm"
+								className="bg-emerald-600 hover:bg-emerald-700 text-white"
+							>
+								<User className="h-4 w-4 mr-2" />
+								{t("login")}
+							</ButtonLink>
+						)}
 					</div>
 				</div>
 			</div>
