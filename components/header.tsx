@@ -1,6 +1,7 @@
 import { Globe, User, Zap } from "lucide-react"
 import { Button } from "./ui/button"
 import { getTranslations } from "next-intl/server"
+import { ButtonLink } from "./button-link"
 
 export async function Header() {
 	const t = await getTranslations("Components.Header")
@@ -27,13 +28,14 @@ export async function Header() {
 							<Globe className="h-4 w-4 mr-2" />
 							CZ
 						</Button>
-						<Button
+						<ButtonLink
+							href="/auth/login"
 							size="sm"
 							className="bg-emerald-600 hover:bg-emerald-700 text-white"
 						>
 							<User className="h-4 w-4 mr-2" />
 							{t("login")}
-						</Button>
+						</ButtonLink>
 					</div>
 				</div>
 			</div>
