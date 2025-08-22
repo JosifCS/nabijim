@@ -1,3 +1,4 @@
+import { ButtonLink } from "@/components/button-link"
 import { Button } from "@/components/ui/button"
 import {
 	Card,
@@ -43,10 +44,10 @@ export default async function Page() {
 								{t("chargeDescription")}
 							</CardDescription>
 						</div>
-						<Button className="bg-emerald-600 hover:bg-emerald-700">
+						<ButtonLink href="/user/settings/dialog/edit-station">
 							<Plus className="h-4 w-4 mr-2" />
 							{t("addStation")}
-						</Button>
+						</ButtonLink>
 					</div>
 				</CardHeader>
 				<CardContent>
