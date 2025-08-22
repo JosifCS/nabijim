@@ -14,7 +14,7 @@ export async function Header() {
 							<Zap className="h-5 w-5 text-white" />
 						</div>
 						<span className="text-xl font-bold text-emerald-800 dark:text-emerald-200">
-							Nabijím.to
+							Nabíjím.to
 						</span>
 					</div>
 
