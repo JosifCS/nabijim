@@ -15,6 +15,7 @@ import { useDebouncedCallback } from "use-debounce"
 import { Button } from "./ui/button"
 import { toast } from "sonner"
 import { SafeActionResult } from "@/modules/safe-action"
+import { Skeleton } from "./ui/skeleton"
 
 type FormWrapper = {
 	action: any
@@ -135,5 +136,22 @@ export function Form({
 				</div>
 			)}
 		</form>
+	)
+}
+
+type FormSkeletonProps = {
+	children: React.ReactNode
+	className?: string
+}
+
+export function FormSkeleton({ children, className }: FormSkeletonProps) {
+	return (
+		<div className={cn("flex flex-col gap-4", className)}>
+			{children}
+
+			<div className="w-full flex justify-end">
+				<Skeleton className="h-10 w-24" />
+			</div>
+		</div>
 	)
 }
