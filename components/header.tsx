@@ -4,6 +4,7 @@ import { getLocale, getTranslations } from "next-intl/server"
 import { ButtonLink } from "./button-link"
 import { auth0 } from "@/lib/auth0"
 import { LocaleSelect } from "./locale-select"
+import { UserMenu } from "./user-menu"
 
 export async function Header() {
 	const session = await auth0.getSession()
@@ -29,14 +30,17 @@ export async function Header() {
 							label={t("localeSelect")}
 						/>
 						{session ? (
-							<ButtonLink
-								href="/auth/logout"
-								size="sm"
-								className="bg-emerald-600 hover:bg-emerald-700 text-white"
-							>
-								<LogOut className="h-4 w-4 mr-2" />
-								{t("logout")}
-							</ButtonLink>
+							<UserMenu
+								messages={{
+									userName:
+										session.user.name ??
+										session.user.email ??
+										"N/A",
+									logout: t("logout"),
+									myAccount: t("myAccount"),
+									settings: t("settings"),
+								}}
+							/>
 						) : (
 							<ButtonLink
 								href="/auth/login"
