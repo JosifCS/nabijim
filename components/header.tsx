@@ -11,7 +11,7 @@ export async function Header() {
 	const t = await getTranslations("Components.Header")
 
 	return (
-		<header className="fixed w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-emerald-200 dark:border-emerald-800">
+		<header className="fixed w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-emerald-200 dark:border-emerald-800 z-10">
 			<div className="container mx-auto px-4 py-4 max-w-6xl">
 				<div className="flex items-center justify-between">
 					<div className="flex items-center gap-3">
