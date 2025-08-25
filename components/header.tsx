@@ -4,6 +4,7 @@ import { ButtonLink } from "./button-link"
 import { auth0 } from "@/lib/auth0"
 import { LocaleSelect } from "./locale-select"
 import { UserMenu } from "./user-menu"
+import Link from "next/link"
 
 export async function Header() {
 	const session = await auth0.getSession()
@@ -14,14 +15,14 @@ export async function Header() {
 		<header className="fixed w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-emerald-200 dark:border-emerald-800 z-10">
 			<div className="container mx-auto px-4 py-4 max-w-6xl">
 				<div className="flex items-center justify-between">
-					<div className="flex items-center gap-3">
+					<Link href="/" className="flex items-center gap-3">
 						<div className="p-2 bg-emerald-600 rounded-full">
 							<Zap className="h-5 w-5 text-white" />
 						</div>
 						<span className="text-xl font-bold text-emerald-800 dark:text-emerald-200">
 							Nabíjím.to
 						</span>
-					</div>
+					</Link>
 
 					<div className="flex items-center gap-3">
 						<LocaleSelect

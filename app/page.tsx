@@ -1,5 +1,6 @@
 import { ButtonLink } from "@/components/button-link"
 import { InfoCard } from "@/components/info-card"
+import { auth0 } from "@/lib/auth0"
 import {
 	BarChart3,
 	Clock,
@@ -7,13 +8,19 @@ import {
 	Home,
 	Mail,
 	MapPin,
+	Plus,
 	TrendingUp,
 	Zap,
 } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
+import { redirect } from "next/navigation"
 
-export default function Page() {
-	const t = useTranslations("Index")
+export default async function Page() {
+	const session = await auth0.getSession()
+
+	if (session) redirect("/dashboard")
+
+	const t = await getTranslations("Index")
 
 	return (
 		<div className="container mx-auto px-4 py-12 max-w-6xl">
