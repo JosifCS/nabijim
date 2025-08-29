@@ -34,7 +34,11 @@
 			"chargeDescription": "Add your home charging station and other private stations.",
 			"stations": "Own charging station",
 			"noStations": "You don't have any charging stations of your own yet.",
-			"addStation": "Add station"
+			"addStation": "Add station",
+			"edit": "Edit",
+			"remove": "Delete",
+			"address": "Address",
+			"priceKwh": "Price per KWh"
 		}
 	},
 	"Dashboard": {

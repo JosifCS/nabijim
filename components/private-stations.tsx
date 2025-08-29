@@ -62,9 +62,14 @@ export async function PrivateStations({ userId }: { userId: number }) {
 											{x.station.name}
 										</h3>
 										<div className="flex items-center gap-4 text-sm text-emerald-600 dark:text-emerald-400">
-											<span>XX Kč/kWh</span>
+											<span title={t("priceKwh")}>
+												XX Kč/kWh
+											</span>
 											{addressString(x.station) && (
-												<span className="flex items-center gap-1">
+												<span
+													className="flex items-center gap-1"
+													title={t("address")}
+												>
 													<MapPin className="h-3 w-3" />
 													{addressString(x.station)}
 												</span>
@@ -77,6 +82,7 @@ export async function PrivateStations({ userId }: { userId: number }) {
 										href={`/user/settings/station?id=${x.station.id}`}
 										variant="outline"
 										size="sm"
+										title={t("edit")}
 										className="border-emerald-300 text-emerald-700 hover:bg-emerald-50 dark:border-emerald-700 dark:text-emerald-300"
 									>
 										<Edit className="h-4 w-4" />
@@ -84,6 +90,7 @@ export async function PrivateStations({ userId }: { userId: number }) {
 									<Button
 										variant="outline"
 										size="sm"
+										title={t("remove")}
 										className="border-red-300 text-red-700 hover:bg-red-50 dark:border-red-700 dark:text-red-300"
 									>
 										<Trash2 className="h-4 w-4" />

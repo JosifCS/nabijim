@@ -34,7 +34,11 @@
 			"chargeDescription": "Přidejte svou domací nabíjecí stanici a další soukromé stanice.",
 			"stations": "Vlastní nabíjecí stanice",
 			"noStations": "Zatím nemáte žádné vlastní nabíjecí stanice",
-			"addStation": "Přidat stanici"
+			"addStation": "Přidat stanici",
+			"edit": "Upravit",
+			"remove": "Smazat",
+			"address": "Adresa",
+			"priceKwh": "Cena za KWh"
 		}
 	},
 	"Dashboard": {
