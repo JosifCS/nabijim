@@ -17,8 +17,9 @@ export default async function Page() {
 	const user = await authorize()
 	const t = await getTranslations("User.Settings")
 
-	const stations = await prisma.chargeStation.findMany({
+	const stations = await prisma.privateStation.findMany({
 		where: { userId: user.id },
+		select: { id: true, station: true },
 	})
 
 	return (
@@ -44,7 +45,7 @@ export default async function Page() {
 								{t("chargeDescription")}
 							</CardDescription>
 						</div>
-						<ButtonLink href="/user/settings/dialog/edit-station">
+						<ButtonLink href="/user/settings/station">
 							<Plus className="h-4 w-4 mr-2" />
 							{t("addStation")}
 						</ButtonLink>
@@ -58,9 +59,9 @@ export default async function Page() {
 						</div>
 					) : (
 						<div className="grid gap-4">
-							{stations.map((station) => (
+							{stations.map((x) => (
 								<div
-									key={station.id}
+									key={x.id}
 									className="flex items-center justify-between p-4 border border-emerald-200 dark:border-emerald-800 rounded-lg bg-emerald-50/50 dark:bg-emerald-900/20"
 								>
 									<div className="flex items-center gap-3">
@@ -69,14 +70,16 @@ export default async function Page() {
 										</div>
 										<div>
 											<h3 className="font-semibold text-emerald-800 dark:text-emerald-200">
-												{station.name}
+												{x.station.name}
 											</h3>
 											<div className="flex items-center gap-4 text-sm text-emerald-600 dark:text-emerald-400">
 												<span>XX Kč/kWh</span>
-												{addressString(station) && (
+												{addressString(x.station) && (
 													<span className="flex items-center gap-1">
 														<MapPin className="h-3 w-3" />
-														{addressString(station)}
+														{addressString(
+															x.station
+														)}
 													</span>
 												)}
 											</div>

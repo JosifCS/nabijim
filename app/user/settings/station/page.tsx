@@ -1,102 +1,67 @@
+import { editPrivateStation } from "@/actions/edit-private-station"
+import { Form } from "@/components/form"
+import { FormInput } from "@/components/form-input"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import prisma from "@/lib/prisma"
 import { authorize } from "@/modules/auth"
-import { addressString } from "@/modules/utils"
-import {
-	Calendar,
-	Clock,
-	Earth,
-	Edit,
-	Euro,
-	MapPin,
-	UserLock,
-	Zap,
-} from "lucide-react"
+import { Calendar, Clock, Euro, Zap } from "lucide-react"
 import { notFound } from "next/navigation"
 
-export default async function Page() {
+export default async function Page({
+	searchParams,
+}: PageProps<"/user/settings/station">) {
 	const user = await authorize()
-	const station = await prisma.chargeStation.findFirst({
-		where: { id: 0 },
-		select: {
-			provider: true,
-			customName: true,
-			name: true,
-			userId: true,
-			city: true,
-			streetNumber: true,
-			street: true,
-			houseNumber: true,
-			connectors: {
-				select: {
-					dc: true,
-					id: true,
-					tariffs: {
-						select: {
-							times: true,
-							name: true,
-							id: true,
-							validFrom: true,
-							validTo: true,
-						},
-					},
-					name: true,
-					chargeSessions: true,
-				},
-			},
-		},
-	})
+	const { id } = await searchParams
 
-	if (station == null) return notFound()
+	const station = Number(id)
+		? await getPrivateStation(user.id, Number(id))
+		: NEW_STATION
+
+	if (!station) return notFound()
 
 	return (
 		<div className="container mx-auto px-4 py-8 max-w-6xl">
+			<Card>
+				<CardContent>
+					<Form action={editPrivateStation}>
+						<FormInput
+							type="text"
+							name="name"
+							defaultValue={station.name}
+							placeholder="Name"
+						/>
+						<FormInput
+							type="text"
+							name="city"
+							defaultValue={station.city ?? ""}
+							placeholder="City"
+						/>
+						<FormInput
+							type="text"
+							name="street"
+							defaultValue={station.street ?? ""}
+							placeholder="Street"
+						/>
+						<FormInput
+							type="number"
+							name="streetNumber"
+							defaultValue={station.streetNumber ?? ""}
+							placeholder="Street number"
+						/>
+						<FormInput
+							type="number"
+							name="houseNumber"
+							defaultValue={station.houseNumber ?? ""}
+							placeholder="House number"
+						/>
+					</Form>
+				</CardContent>
+			</Card>
+
 			<div className="mb-8">
 				<div className="flex items-start justify-between mb-4">
-					<div>
-						<h1 className="text-3xl text-emerald-800 dark:text-emerald-200 mb-2">
-							{station.customName?.length ? (
-								<>
-									<span className="font-bold">
-										{station.customName}
-									</span>
-									<span className="font-bold">
-										({station.name})
-									</span>
-								</>
-							) : (
-								station.name
-							)}
-						</h1>
-						<div className="flex items-center gap-4 text-emerald-700 dark:text-emerald-300">
-							<div className="flex items-center gap-1">
-								{station.provider != null && (
-									<Earth className="h-4 w-4" />
-								)}
-								{station.userId != null && (
-									<UserLock className="h-4 w-4" />
-								)}
-								<span>
-									{station.provider?.name ?? user.email}
-								</span>
-							</div>
-							{(station.city || station.street) && (
-								<div className="flex items-center gap-1">
-									<MapPin className="h-4 w-4" />
-									<span>{addressString(station)}</span>
-								</div>
-							)}
-						</div>
-					</div>
-					<Button
-						variant="outline"
-						className="border-emerald-300 text-emerald-700 hover:bg-emerald-50 bg-transparent"
-					>
-						<Edit className="h-4 w-4 mr-2" />
-						Upravit
-					</Button>
+					<div></div>
 				</div>
 			</div>
 
@@ -194,4 +159,45 @@ export default async function Page() {
 			))}
 		</div>
 	)
+}
+
+const NEW_STATION = {
+	id: 0,
+	name: String.Empty,
+	city: String.Empty,
+	street: String.Empty,
+	streetNumber: null,
+	houseNumber: null,
+	connectors: [],
+}
+
+async function getPrivateStation(userId: number, id: number) {
+	return await prisma.station.findFirst({
+		where: { id, private: { userId } },
+		select: {
+			id: true,
+			name: true,
+			city: true,
+			streetNumber: true,
+			street: true,
+			houseNumber: true,
+			connectors: {
+				select: {
+					dc: true,
+					id: true,
+					tariffs: {
+						select: {
+							times: true,
+							name: true,
+							id: true,
+							validFrom: true,
+							validTo: true,
+						},
+					},
+					name: true,
+					chargeSessions: true,
+				},
+			},
+		},
+	})
 }
