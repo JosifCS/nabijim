@@ -29,6 +29,12 @@
 			"localeSelect": "Výběr jazyka",
 			"settings": "Nastavení",
 			"myAccount": "Můj účet"
+		},
+		"PrivateStations": {
+			"chargeDescription": "Přidejte svou domací nabíjecí stanici a další soukromé stanice.",
+			"stations": "Vlastní nabíjecí stanice",
+			"noStations": "Zatím nemáte žádné vlastní nabíjecí stanice",
+			"addStation": "Přidat stanici"
 		}
 	},
 	"Dashboard": {
@@ -60,11 +66,7 @@
 	"User": {
 		"Settings": {
 			"settings": "Nastavení",
-			"chargeDescription": "Přidejte svou domací nabíjecí stanici a další soukromé stanice.",
-			"description": "Spravujte své stanice, ceny nabíjení a další",
-			"stations": "Vlastní nabíjecí stanice",
-			"noStations": "Zatím nemáte žádné vlastní nabíjecí stanice",
-			"addStation": "Přidat stanici"
+			"description": "Spravujte své stanice, ceny nabíjení a další"
 		}
 	}
 }

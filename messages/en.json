@@ -29,6 +29,12 @@
 			"localeSelect": "Language selection",
 			"settings": "Settings",
 			"myAccount": "My account"
+		},
+		"PrivateStations": {
+			"chargeDescription": "Add your home charging station and other private stations.",
+			"stations": "Own charging station",
+			"noStations": "You don't have any charging stations of your own yet.",
+			"addStation": "Add station"
 		}
 	},
 	"Dashboard": {
@@ -60,11 +66,7 @@
 	"User": {
 		"Settings": {
 			"settings": "Settings",
-			"chargeDescription": "Add your home charging station and other private stations.",
-			"description": "Manage your stations, charging prices and more",
-			"stations": "Own charging station",
-			"noStations": "You don't have any charging stations of your own yet.",
-			"addStation": "Add station"
+			"description": "Manage your stations, charging prices and more"
 		}
 	}
 }
