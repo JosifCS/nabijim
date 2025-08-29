@@ -6,6 +6,7 @@ import { Input } from "./ui/input"
 import { Label } from "./ui/label"
 import { Skeleton } from "./ui/skeleton"
 import { cx } from "class-variance-authority"
+import { platform } from "os"
 
 type FormInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
 	label?: string
@@ -17,6 +18,8 @@ export function FormInput({
 	defaultValue,
 	name,
 	skeleton = false,
+	placeholder,
+	title,
 	...props
 }: FormInputProps) {
 	const form = useFormContext()
@@ -39,6 +42,8 @@ export function FormInput({
 							: form.prevState?.[name ?? "x"] ?? defaultValue
 					}
 					onChange={form.onChange}
+					title={title ?? label ?? placeholder}
+					placeholder={placeholder}
 					{...props}
 				/>
 			)}
