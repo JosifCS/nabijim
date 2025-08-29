@@ -26,9 +26,11 @@ export function UserMenu({
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button size="sm">
-					<User className="h-4 w-4 mr-2" />
-					{messages.userName}
+				<Button size="sm" className="flex gap-2">
+					<User className="h-4 w-4" />
+					<span className="hidden sm:inline-block">
+						{messages.userName}
+					</span>
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end">
