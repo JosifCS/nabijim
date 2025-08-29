@@ -4,16 +4,18 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## ENV variables
 
--   DATABASE_URL
--   AUTH0_SECRET _(openssl rand -hex 32)_
--   APP_BASE_URL _(http://localhost:3000)_
--   AUTH0_DOMAIN
--   AUTH0_CLIENT_ID
--   AUTH0_CLIENT_SECRET
+```env
+DATABASE_URL=""
+AUTH0_SECRET="" (openssl rand -hex 32)
+APP_BASE_URL="http://localhost:3000"
+AUTH0_DOMAIN=""
+AUTH0_CLIENT_ID=""
+AUTH0_CLIENT_SECRET=""
+```
 
 ## Run it
 
-```
+```ps
 pnpm i
 pnpm prisma generate
 pnpm run dev
