@@ -177,7 +177,7 @@ export function RecentChargingsSkeleton() {
 							<div className="flex-1">
 								<div className="flex items-center gap-2 mb-2 h-6">
 									<MapPin className="h-4 w-4 text-emerald-600" />
-									<Skeleton className="bg-emerald-100 h-[22px] w-20" />
+									<Skeleton className="h-[22px] w-20" />
 									<Skeleton className="h-[22px] w-24" />
 								</div>
 								<div className="flex items-center gap-4 text-sm text-muted-foreground h-5">
@@ -196,7 +196,7 @@ export function RecentChargingsSkeleton() {
 								</div>
 							</div>
 							<div className="flex flex-col gap-2 items-end">
-								<Skeleton className="bg-emerald-100 h-6 w-16" />
+								<Skeleton className="h-6 w-16" />
 								<Skeleton className="h-4 w-20" />
 							</div>
 						</div>

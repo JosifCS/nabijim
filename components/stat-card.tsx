@@ -46,7 +46,7 @@ export function StatCardSkeleton({
 				<div className="text-emerald-600">{icon}</div>
 			</CardHeader>
 			<CardContent>
-				<Skeleton className="h-6 w-32 mb-2 bg-emerald-100" />
+				<Skeleton className="h-6 w-32 mb-2" />
 				<Skeleton className="h-4 w-24" />
 			</CardContent>
 		</Card>
