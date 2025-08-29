@@ -19,7 +19,8 @@ model User {
   email           String   @unique @db.VarChar(255)
   files           File[]
   chargeSessions  ChargeSession[]
-  privateStations ChargeStation[]
+  privateStations PrivateStation[]
+  favoriteStations PublicStation[]
 
   @@map("users")
 }
@@ -59,21 +60,41 @@ model ChargeSession {
   @@map("chargeSession")
 }
 
-model ChargeStation {
+model Station {
   id              Int @id @default(autoincrement())
   name            String
-  customName      String?
-  provider        Provider? @relation(fields: [providerId], references: [id])
-  providerId      Int?
-  user            User? @relation(fields: [userId], references: [id])
-  userId          Int?
   city            String?
   street          String?
   streetNumber    Int?
   houseNumber     Int?
   connectors      ChargeConnector[]
+  public          PublicStation? @relation("StationPublicStation")
+  publicId        Int? 
+  private         PrivateStation? @relation("StationPrivateStation")
+  privateId       Int?
 
-  @@map("chargeStations")
+  @@map("stations")
+}
+
+model PublicStation {
+  id              Int @id @default(autoincrement())
+  station         Station @relation("StationPublicStation", fields: [stationId], references: [id])
+  stationId       Int @unique
+  provider        Provider? @relation(fields: [providerId], references: [id])
+  providerId      Int?
+  favorited       User[] 
+
+  @@map("publicStations")
+}
+
+model PrivateStation {
+  id              Int @id @default(autoincrement())
+  station         Station @relation("StationPrivateStation", fields: [stationId], references: [id])
+  stationId       Int @unique
+  user            User? @relation(fields: [userId], references: [id])
+  userId          Int?
+ 
+  @@map("privateStations")
 }
 
 model ChargeConnector {
@@ -81,7 +102,7 @@ model ChargeConnector {
   dc              Boolean
   name            String?
   chargeSessions  ChargeSession[]
-  station         ChargeStation @relation(fields: [stationId], references: [id])
+  station         Station @relation(fields: [stationId], references: [id])
   stationId       Int
   tariffs         ChargeTariff[]
 
@@ -116,7 +137,7 @@ model Provider {
   id              Int @id @default(autoincrement())
   name            String
   description     String?
-  stations        ChargeStation[]
+  stations        PublicStation[]
   chargeSessions  ChargeSession[]
 
   @@map("providers")
