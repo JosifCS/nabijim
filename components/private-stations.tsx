@@ -18,7 +18,7 @@ export async function PrivateStations({ userId }: { userId: number }) {
 
 	const stations = await prisma.privateStation.findMany({
 		where: { userId },
-		select: { id: true, station: true },
+		select: { id: true, station: { include: { chargingHub: true } } },
 	})
 
 	return (
@@ -65,13 +65,17 @@ export async function PrivateStations({ userId }: { userId: number }) {
 											<span title={t("priceKwh")}>
 												XX Kč/kWh
 											</span>
-											{addressString(x.station) && (
+											{addressString(
+												x.station.chargingHub
+											) && (
 												<span
 													className="flex items-center gap-1"
 													title={t("address")}
 												>
 													<MapPin className="h-3 w-3" />
-													{addressString(x.station)}
+													{addressString(
+														x.station.chargingHub
+													)}
 												</span>
 											)}
 										</div>

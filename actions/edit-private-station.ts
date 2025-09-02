@@ -28,10 +28,14 @@ export const editPrivateStation = safeAction(
 				where: { id: id, private: { userId: user.id } },
 				data: {
 					name,
-					streetNumber,
-					houseNumber,
-					city: city.length ? city : null,
-					street: street.length ? street : null,
+					chargingHub: {
+						update: {
+							streetNumber,
+							houseNumber,
+							city: city.length ? city : null,
+							street: street.length ? street : null,
+						},
+					},
 				},
 			})
 			return actionResult(true, "saved", `/user/settings`)
@@ -40,10 +44,14 @@ export const editPrivateStation = safeAction(
 				data: {
 					private: { create: { userId: user.id } },
 					name,
-					streetNumber,
-					houseNumber,
-					city: city.length ? city : null,
-					street: street.length ? street : null,
+					chargingHub: {
+						create: {
+							streetNumber,
+							houseNumber,
+							city: city.length ? city : null,
+							street: street.length ? street : null,
+						},
+					},
 				},
 			})
 			return actionResult(true, "created", `/user/settings`)

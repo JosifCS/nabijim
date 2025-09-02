@@ -39,6 +39,16 @@
 			"remove": "Smazat",
 			"address": "Adresa",
 			"priceKwh": "Cena za KWh"
+		},
+		"Connectors": {
+			"connectors": "Nabíjecí konektory",
+			"description": "Každá stanice může mít jeden nebo více nabíjecích konektorů.",
+			"addConnector": "Přidat konektor",
+			"noConnectors": "Žádné nabíjecí konektory",
+			"edit": "Upravit",
+			"remove": "Odstranit",
+			"priceKwh": "Cena za KWh",
+			"needCable": "Potřeba vlastní kabel"
 		}
 	},
 	"Dashboard": {
