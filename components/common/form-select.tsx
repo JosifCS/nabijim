@@ -15,6 +15,7 @@ import { Translations } from "@/lib/types"
 type FormSelectProps = {
 	label?: string
 	value?: string
+	title?: string
 	defaultValue?: string
 	options: { value: string; label?: string }[]
 	name?: string
@@ -30,6 +31,7 @@ export function FormSelect({
 	placeholder,
 	translations: t,
 	name,
+	title,
 	onChange,
 	...props
 }: FormSelectProps) {
@@ -51,7 +53,7 @@ export function FormSelect({
 				}
 				{...props}
 			>
-				<SelectTrigger>
+				<SelectTrigger title={title ?? label ?? placeholder}>
 					<SelectValue placeholder={placeholder} />
 				</SelectTrigger>
 				<SelectContent>
