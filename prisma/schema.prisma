@@ -62,7 +62,7 @@ model ChargeSession {
 
 model ChargingHub {
   id           Int @id @default(autoincrement())
-  name         String
+  name         String?
   city         String?
   street       String?
   streetNumber Int?
@@ -73,8 +73,8 @@ model ChargingHub {
 	email        String?
 	url          String?
   stations     Station[]
-  latitude     Float
-	longitude    Float
+  latitude     Float?
+	longitude    Float?
 
   @@map("chargingHubs")
 }
