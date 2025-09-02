@@ -1,4 +1,4 @@
-import { GetPrivateStation } from "./queries"
+import { GetPrivateStation, GetProvider } from "./queries"
 
 export const EMPTY_PRIVATE_STATION: GetPrivateStation = {
 	id: 0,
@@ -23,4 +23,15 @@ export const EMPTY_PRIVATE_STATION: GetPrivateStation = {
 		latitude: null,
 		longitude: null,
 	},
+}
+
+export const EMPTY_PROVIDER: GetProvider = {
+	id: 0,
+	description: null,
+	email: null,
+	importUrl: null,
+	name: String.Empty,
+	phoneNumber: null,
+	url: null,
+	importSchema: null,
 }

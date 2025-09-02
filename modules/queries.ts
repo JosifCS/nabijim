@@ -11,3 +11,12 @@ export async function getPrivateStation(userId: number, id: number) {
 		},
 	})
 }
+
+export type GetProvider = Awaited<ReturnType<typeof getProvider>>
+
+export async function getProvider(id: number) {
+	return await prisma.provider.findFirst({
+		where: { id },
+		include: {},
+	})
+}
