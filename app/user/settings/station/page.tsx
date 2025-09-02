@@ -3,9 +3,10 @@ import { Connectors } from "@/components/connectors"
 import { Form } from "@/components/common/form"
 import { FormInput } from "@/components/common/form-input"
 import { Card, CardContent } from "@/components/ui/card"
-import prisma from "@/lib/prisma"
 import { authorize } from "@/modules/auth"
 import { notFound } from "next/navigation"
+import { getPrivateStation } from "@/modules/queries"
+import { EMPTY_PRIVATE_STATION } from "@/modules/empty-data"
 
 export default async function Page({
 	searchParams,
@@ -15,7 +16,7 @@ export default async function Page({
 
 	const station = Number(id)
 		? await getPrivateStation(user.id, Number(id))
-		: NEW_STATION
+		: EMPTY_PRIVATE_STATION
 
 	if (!station) return notFound()
 	station.chargingHub
@@ -63,31 +64,4 @@ export default async function Page({
 			{station.id && <Connectors stationId={station.id} />}
 		</div>
 	)
-}
-
-const NEW_STATION = {
-	id: 0,
-	name: String.Empty,
-	chargingHub: {
-		id: 0,
-		email: null,
-		name: String.Empty,
-		city: null,
-		street: null,
-		streetNumber: null,
-		houseNumber: null,
-		postalCode: null,
-		country: null,
-		phoneNumber: null,
-		url: null,
-		latitude: null,
-		longitude: null,
-	},
-}
-
-async function getPrivateStation(userId: number, id: number) {
-	return await prisma.station.findFirst({
-		where: { id, private: { userId } },
-		include: { chargingHub: true },
-	})
 }
