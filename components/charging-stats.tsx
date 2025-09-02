@@ -1,5 +1,5 @@
 import { TrendingUp, Zap, Euro, Calendar } from "lucide-react"
-import { StatCard, StatCardSkeleton } from "./stat-card"
+import { StatCard, StatCardSkeleton } from "./common/stat-card"
 import { getLocale, getTranslations } from "next-intl/server"
 import { useTranslations } from "next-intl"
 

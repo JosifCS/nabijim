@@ -1,5 +1,5 @@
-import { ButtonLink } from "@/components/button-link"
-import { InfoCard } from "@/components/info-card"
+import { ButtonLink } from "@/components/common/button-link"
+import { InfoCard } from "@/components/common/info-card"
 import { auth0 } from "@/lib/auth0"
 import {
 	BarChart3,

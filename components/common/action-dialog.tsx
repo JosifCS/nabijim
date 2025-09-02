@@ -1,7 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { Dialog } from "./ui/dialog"
+import { Dialog } from "../ui/dialog"
 
 interface ActionDialogProps {
 	children: React.ReactNode

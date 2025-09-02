@@ -1,4 +1,4 @@
-import { Card, CardDescription, CardHeader, CardTitle } from "./ui/card"
+import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card"
 import { ReactNode } from "react"
 
 export function InfoCard({

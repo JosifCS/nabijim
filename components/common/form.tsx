@@ -12,10 +12,10 @@ import {
 import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { useDebouncedCallback } from "use-debounce"
-import { Button } from "./ui/button"
+import { Button } from "../ui/button"
 import { toast } from "sonner"
 import { SafeActionResult } from "@/modules/safe-action"
-import { Skeleton } from "./ui/skeleton"
+import { Skeleton } from "../ui/skeleton"
 
 type FormWrapper = {
 	action: (

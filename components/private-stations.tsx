@@ -1,4 +1,4 @@
-import { ButtonLink } from "@/components/button-link"
+import { ButtonLink } from "@/components/common/button-link"
 import { Button } from "@/components/ui/button"
 import {
 	Card,

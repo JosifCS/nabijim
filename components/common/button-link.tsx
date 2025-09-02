@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Button, buttonVariants } from "./ui/button"
+import { Button, buttonVariants } from "../ui/button"
 import { VariantProps } from "class-variance-authority"
 import { HTMLAttributeAnchorTarget } from "react"
 

@@ -2,9 +2,9 @@
 
 import { useId } from "react"
 import { useFormContext } from "./form"
-import { Input } from "./ui/input"
-import { Label } from "./ui/label"
-import { Skeleton } from "./ui/skeleton"
+import { Input } from "../ui/input"
+import { Label } from "../ui/label"
+import { Skeleton } from "../ui/skeleton"
 import { cx } from "class-variance-authority"
 import { platform } from "os"
 

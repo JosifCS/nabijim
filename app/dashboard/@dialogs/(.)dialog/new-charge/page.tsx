@@ -1,7 +1,7 @@
 import { newCharge } from "@/actions/new-charge"
-import { Dialog } from "@/components/dialog"
-import { Form } from "@/components/form"
-import { FormInput } from "@/components/form-input"
+import { Dialog } from "@/components/common/dialog"
+import { Form } from "@/components/common/form"
+import { FormInput } from "@/components/common/form-input"
 import { Button } from "@/components/ui/button"
 import { DialogFooter } from "@/components/ui/dialog"
 

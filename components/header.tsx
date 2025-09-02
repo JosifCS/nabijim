@@ -1,6 +1,6 @@
 import { User, Zap } from "lucide-react"
 import { getLocale, getTranslations } from "next-intl/server"
-import { ButtonLink } from "./button-link"
+import { ButtonLink } from "./common/button-link"
 import { auth0 } from "@/lib/auth0"
 import { LocaleSelect } from "./locale-select"
 import { UserMenu } from "./user-menu"
