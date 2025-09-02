@@ -11,6 +11,7 @@ APP_BASE_URL="http://localhost:3000"
 AUTH0_DOMAIN=""
 AUTH0_CLIENT_ID=""
 AUTH0_CLIENT_SECRET=""
+ADMINS=["admin@email.com"]
 ```
 
 ## Run it

@@ -7,10 +7,13 @@ export async function authorize() {
 
 	if (session) {
 		const user = await getUser(session.user.email!)
+		const admins: string[] = JSON.parse(process.env.ADMINS ?? "[]")
+
 		return {
 			email: user.email,
 			id: user.id,
 			nickname: session.user.nickname!,
+			admin: admins.includes(user.email),
 		}
 	}
 
