@@ -57,7 +57,9 @@
 			"addProvider": "Přidat provozovatele",
 			"noProviders": "Žádní provozovatelé",
 			"edit": "Upravit",
-			"remove": "Smazat"
+			"remove": "Smazat",
+			"stations": "Počet nabíjecích stanic",
+			"stationsCount": "{count} dobíjecích stanic"
 		}
 	},
 	"Dashboard": {

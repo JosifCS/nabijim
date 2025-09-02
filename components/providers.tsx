@@ -8,14 +8,16 @@ import {
 	CardTitle,
 } from "@/components/ui/card"
 import prisma from "@/lib/prisma"
-import { Building2, Edit, Plus, Trash2 } from "lucide-react"
+import { Building2, Edit, Plus, Trash2, Zap } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 import { Skeleton } from "./ui/skeleton"
 
 export async function Providers() {
 	const t = await getTranslations("Components.Providers")
 
-	const providers = await prisma.provider.findMany({})
+	const providers = await prisma.provider.findMany({
+		include: { stations: { select: { _count: true } } },
+	})
 
 	return (
 		<Card>
@@ -56,20 +58,15 @@ export async function Providers() {
 											{x.name}
 										</h3>
 										<div className="flex items-center gap-4 text-sm text-emerald-600 dark:text-emerald-400">
-											<span title="">XX Kč/kWh</span>
-											{/*addressString(
-												x.station.chargingHub
-											) && (
-												<span
-													className="flex items-center gap-1"
-													title={t("address")}
-												>
-													<MapPin className="h-3 w-3" />
-													{addressString(
-														x.station.chargingHub
-													)}
-												</span>
-											)*/}
+											<span
+												className="flex items-center gap-1"
+												title={t("stations")}
+											>
+												<Zap className="h-3 w-3" />
+												{t("stationsCount", {
+													count: x.stations.length,
+												})}
+											</span>
 										</div>
 									</div>
 								</div>
@@ -134,7 +131,6 @@ export async function ProvidersSkeleton() {
 							</div>
 						</div>
 						<div className="flex items-center gap-2">
-							<Skeleton className="h-8 w-9" />
 							<Skeleton className="h-8 w-9" />
 						</div>
 					</div>

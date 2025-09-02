@@ -61,7 +61,7 @@ export default async function Page({
 				</CardContent>
 			</Card>
 
-			{station.id && <Connectors stationId={station.id} />}
+			{station.id ? <Connectors stationId={station.id} /> : null}
 		</div>
 	)
 }

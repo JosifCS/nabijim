@@ -57,7 +57,9 @@
 			"addProvider": "Add operator",
 			"noProviders": "No operators",
 			"edit": "Edit",
-			"remove": "Delete"
+			"remove": "Delete",
+			"stations": "Number of charging stations",
+			"stationsCount": "{count} charging stations"
 		}
 	},
 	"Dashboard": {

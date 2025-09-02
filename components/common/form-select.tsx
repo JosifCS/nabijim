@@ -53,7 +53,10 @@ export function FormSelect({
 				}
 				{...props}
 			>
-				<SelectTrigger title={title ?? label ?? placeholder}>
+				<SelectTrigger
+					className="w-full"
+					title={title ?? label ?? placeholder}
+				>
 					<SelectValue placeholder={placeholder} />
 				</SelectTrigger>
 				<SelectContent>
