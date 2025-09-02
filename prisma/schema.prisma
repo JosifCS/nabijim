@@ -15,12 +15,12 @@ datasource db {
 }
 
 model User {
-  id              Int      @id @default(autoincrement())
-  email           String   @unique @db.VarChar(255)
-  files           File[]
-  chargeSessions  ChargeSession[]
-  privateStations PrivateStation[]
-  favoriteStations PublicStation[]
+  id                Int      @id @default(autoincrement())
+  email             String   @unique @db.VarChar(255)
+  files             File[]
+  chargeSessions    ChargeSession[]
+  privateStations   PrivateStation[]
+  favoriteStations  PublicStation[]
 
   @@map("users")
 }
@@ -44,7 +44,7 @@ model ChargeSession {
   id          Int  @id @default(autoincrement())
   user        User @relation(fields: [userId], references: [id])
   userId      Int
-  connector   ChargeConnector @relation(fields: [connectorId], references: [id])
+  connector   Connector @relation(fields: [connectorId], references: [id])
   connectorId Int
   provider    Provider @relation(fields: [providerId], references: [id])
   providerId  Int
@@ -57,17 +57,35 @@ model ChargeSession {
   invoice     File? @relation("ChargeSessionFile", fields: [invoiceId], references: [id])
   invoiceId   Int?  @unique
 
-  @@map("chargeSession")
+  @@map("chargeSessions")
+}
+
+model ChargingHub {
+  id           Int @id @default(autoincrement())
+  name         String
+  city         String?
+  street       String?
+  streetNumber Int?
+  houseNumber  Int?
+  postalCode   String?
+  country      String?
+	phoneNumber  String?
+	email        String?
+	url          String?
+  stations     Station[]
+  latitude     Float
+	longitude    Float
+
+  @@map("chargingHubs")
 }
 
 model Station {
   id              Int @id @default(autoincrement())
   name            String
-  city            String?
-  street          String?
-  streetNumber    Int?
-  houseNumber     Int?
-  connectors      ChargeConnector[]
+  serialNumber    String?
+  chargingHub     ChargingHub @relation(fields: [chargingHubId], references: [id])
+  chargingHubId   Int
+  connectors      Connector[]
   public          PublicStation? @relation("StationPublicStation")
   publicId        Int? 
   private         PrivateStation? @relation("StationPrivateStation")
@@ -82,7 +100,9 @@ model PublicStation {
   stationId       Int @unique
   provider        Provider? @relation(fields: [providerId], references: [id])
   providerId      Int?
-  favorited       User[] 
+  favorited       User[]
+  imageUrl        String?
+  customId        String?
 
   @@map("publicStations")
 }
@@ -97,31 +117,32 @@ model PrivateStation {
   @@map("privateStations")
 }
 
-model ChargeConnector {
+model Connector {
   id              Int @id @default(autoincrement())
   dc              Boolean
-  name            String?
+  type            String
+  power           Int
+  needCable       Boolean
   chargeSessions  ChargeSession[]
   station         Station @relation(fields: [stationId], references: [id])
   stationId       Int
   tariffs         ChargeTariff[]
 
-  @@map("chargeConnectors")
+  @@map("connectors")
 }
 
 model ChargeTariff {
-  id              Int @id @default(autoincrement())
-  name            String?
-  validFrom DateTime
-  validTo DateTime?
-  times ChargeTariffTime[]
-  connector ChargeConnector @relation(fields: [connectorId], references: [id])
-  connectorId Int
+  id         Int @id @default(autoincrement())
+  name       String?
+  validFrom  DateTime
+  validTo    DateTime?
+  times      TariffTime[]
+  connectors Connector[]
 
   @@map("chargeTariffs")
 }
 
-model ChargeTariffTime {
+model TariffTime {
   id        Int @id @default(autoincrement())
   days      Int[]
   from      String
@@ -130,7 +151,7 @@ model ChargeTariffTime {
   tariff    ChargeTariff @relation(fields: [tariffId], references: [id])
   tariffId  Int
 
-  @@map("chargeTariffTimes")
+  @@map("TariffTimes")
 }
 
 model Provider {
@@ -139,6 +160,10 @@ model Provider {
   description     String?
   stations        PublicStation[]
   chargeSessions  ChargeSession[]
+  phoneNumber     String?
+	email           String?
+	url             String?
+  importUrl       String?
 
   @@map("providers")
 }

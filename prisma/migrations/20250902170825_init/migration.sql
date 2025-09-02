@@ -21,7 +21,7 @@ CREATE TABLE "public"."files" (
 );
 
 -- CreateTable
-CREATE TABLE "public"."chargeSession" (
+CREATE TABLE "public"."chargeSessions" (
     "id" SERIAL NOT NULL,
     "userId" INTEGER NOT NULL,
     "connectorId" INTEGER NOT NULL,
@@ -34,17 +34,34 @@ CREATE TABLE "public"."chargeSession" (
     "price" DOUBLE PRECISION NOT NULL,
     "invoiceId" INTEGER,
 
-    CONSTRAINT "chargeSession_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "chargeSessions_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "public"."stations" (
+CREATE TABLE "public"."chargingHubs" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "city" TEXT,
     "street" TEXT,
     "streetNumber" INTEGER,
     "houseNumber" INTEGER,
+    "postalCode" TEXT,
+    "country" TEXT,
+    "phoneNumber" TEXT,
+    "email" TEXT,
+    "url" TEXT,
+    "latitude" DOUBLE PRECISION NOT NULL,
+    "longitude" DOUBLE PRECISION NOT NULL,
+
+    CONSTRAINT "chargingHubs_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "public"."stations" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+    "serialNumber" TEXT,
+    "chargingHubId" INTEGER NOT NULL,
     "publicId" INTEGER,
     "privateId" INTEGER,
 
@@ -56,6 +73,8 @@ CREATE TABLE "public"."publicStations" (
     "id" SERIAL NOT NULL,
     "stationId" INTEGER NOT NULL,
     "providerId" INTEGER,
+    "imageUrl" TEXT,
+    "customId" TEXT,
 
     CONSTRAINT "publicStations_pkey" PRIMARY KEY ("id")
 );
@@ -70,13 +89,15 @@ CREATE TABLE "public"."privateStations" (
 );
 
 -- CreateTable
-CREATE TABLE "public"."chargeConnectors" (
+CREATE TABLE "public"."connectors" (
     "id" SERIAL NOT NULL,
     "dc" BOOLEAN NOT NULL,
-    "name" TEXT,
+    "type" TEXT NOT NULL,
+    "power" INTEGER NOT NULL,
+    "needCable" BOOLEAN NOT NULL,
     "stationId" INTEGER NOT NULL,
 
-    CONSTRAINT "chargeConnectors_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "connectors_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -85,13 +106,12 @@ CREATE TABLE "public"."chargeTariffs" (
     "name" TEXT,
     "validFrom" TIMESTAMP(3) NOT NULL,
     "validTo" TIMESTAMP(3),
-    "connectorId" INTEGER NOT NULL,
 
     CONSTRAINT "chargeTariffs_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "public"."chargeTariffTimes" (
+CREATE TABLE "public"."TariffTimes" (
     "id" SERIAL NOT NULL,
     "days" INTEGER[],
     "from" TEXT NOT NULL,
@@ -99,7 +119,7 @@ CREATE TABLE "public"."chargeTariffTimes" (
     "price" DOUBLE PRECISION NOT NULL,
     "tariffId" INTEGER NOT NULL,
 
-    CONSTRAINT "chargeTariffTimes_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "TariffTimes_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -107,6 +127,10 @@ CREATE TABLE "public"."providers" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "description" TEXT,
+    "phoneNumber" TEXT,
+    "email" TEXT,
+    "url" TEXT,
+    "importUrl" TEXT,
 
     CONSTRAINT "providers_pkey" PRIMARY KEY ("id")
 );
@@ -119,11 +143,19 @@ CREATE TABLE "public"."_PublicStationToUser" (
     CONSTRAINT "_PublicStationToUser_AB_pkey" PRIMARY KEY ("A","B")
 );
 
+-- CreateTable
+CREATE TABLE "public"."_ChargeTariffToConnector" (
+    "A" INTEGER NOT NULL,
+    "B" INTEGER NOT NULL,
+
+    CONSTRAINT "_ChargeTariffToConnector_AB_pkey" PRIMARY KEY ("A","B")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "public"."users"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "chargeSession_invoiceId_key" ON "public"."chargeSession"("invoiceId");
+CREATE UNIQUE INDEX "chargeSessions_invoiceId_key" ON "public"."chargeSessions"("invoiceId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "publicStations_stationId_key" ON "public"."publicStations"("stationId");
@@ -134,20 +166,26 @@ CREATE UNIQUE INDEX "privateStations_stationId_key" ON "public"."privateStations
 -- CreateIndex
 CREATE INDEX "_PublicStationToUser_B_index" ON "public"."_PublicStationToUser"("B");
 
+-- CreateIndex
+CREATE INDEX "_ChargeTariffToConnector_B_index" ON "public"."_ChargeTariffToConnector"("B");
+
 -- AddForeignKey
 ALTER TABLE "public"."files" ADD CONSTRAINT "files_createdById_fkey" FOREIGN KEY ("createdById") REFERENCES "public"."users"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE "public"."chargeSession" ADD CONSTRAINT "chargeSession_userId_fkey" FOREIGN KEY ("userId") REFERENCES "public"."users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."chargeSessions" ADD CONSTRAINT "chargeSessions_userId_fkey" FOREIGN KEY ("userId") REFERENCES "public"."users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."chargeSession" ADD CONSTRAINT "chargeSession_connectorId_fkey" FOREIGN KEY ("connectorId") REFERENCES "public"."chargeConnectors"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."chargeSessions" ADD CONSTRAINT "chargeSessions_connectorId_fkey" FOREIGN KEY ("connectorId") REFERENCES "public"."connectors"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."chargeSession" ADD CONSTRAINT "chargeSession_providerId_fkey" FOREIGN KEY ("providerId") REFERENCES "public"."providers"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."chargeSessions" ADD CONSTRAINT "chargeSessions_providerId_fkey" FOREIGN KEY ("providerId") REFERENCES "public"."providers"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."chargeSession" ADD CONSTRAINT "chargeSession_invoiceId_fkey" FOREIGN KEY ("invoiceId") REFERENCES "public"."files"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "public"."chargeSessions" ADD CONSTRAINT "chargeSessions_invoiceId_fkey" FOREIGN KEY ("invoiceId") REFERENCES "public"."files"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "public"."stations" ADD CONSTRAINT "stations_chargingHubId_fkey" FOREIGN KEY ("chargingHubId") REFERENCES "public"."chargingHubs"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "public"."publicStations" ADD CONSTRAINT "publicStations_stationId_fkey" FOREIGN KEY ("stationId") REFERENCES "public"."stations"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -162,16 +200,19 @@ ALTER TABLE "public"."privateStations" ADD CONSTRAINT "privateStations_stationId
 ALTER TABLE "public"."privateStations" ADD CONSTRAINT "privateStations_userId_fkey" FOREIGN KEY ("userId") REFERENCES "public"."users"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."chargeConnectors" ADD CONSTRAINT "chargeConnectors_stationId_fkey" FOREIGN KEY ("stationId") REFERENCES "public"."stations"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."connectors" ADD CONSTRAINT "connectors_stationId_fkey" FOREIGN KEY ("stationId") REFERENCES "public"."stations"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."chargeTariffs" ADD CONSTRAINT "chargeTariffs_connectorId_fkey" FOREIGN KEY ("connectorId") REFERENCES "public"."chargeConnectors"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "public"."chargeTariffTimes" ADD CONSTRAINT "chargeTariffTimes_tariffId_fkey" FOREIGN KEY ("tariffId") REFERENCES "public"."chargeTariffs"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."TariffTimes" ADD CONSTRAINT "TariffTimes_tariffId_fkey" FOREIGN KEY ("tariffId") REFERENCES "public"."chargeTariffs"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "public"."_PublicStationToUser" ADD CONSTRAINT "_PublicStationToUser_A_fkey" FOREIGN KEY ("A") REFERENCES "public"."publicStations"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "public"."_PublicStationToUser" ADD CONSTRAINT "_PublicStationToUser_B_fkey" FOREIGN KEY ("B") REFERENCES "public"."users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "public"."_ChargeTariffToConnector" ADD CONSTRAINT "_ChargeTariffToConnector_A_fkey" FOREIGN KEY ("A") REFERENCES "public"."chargeTariffs"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "public"."_ChargeTariffToConnector" ADD CONSTRAINT "_ChargeTariffToConnector_B_fkey" FOREIGN KEY ("B") REFERENCES "public"."connectors"("id") ON DELETE CASCADE ON UPDATE CASCADE;
