@@ -164,6 +164,7 @@ model Provider {
 	email           String?
 	url             String?
   importUrl       String?
+  importSchema    String?
 
   @@map("providers")
 }
