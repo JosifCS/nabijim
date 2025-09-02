@@ -50,6 +50,14 @@
 			"remove": "Odstranit",
 			"priceKwh": "Cena za KWh",
 			"needCable": "Potřeba vlastní kabel"
+		},
+		"Providers": {
+			"providers": "Veřejní provozovatelé",
+			"providersDesc": "Provozovatelé veřejných dobíjecích stanic.",
+			"addProvider": "Přidat provozovatele",
+			"noProviders": "Žádní provozovatelé",
+			"edit": "Upravit",
+			"remove": "Smazat"
 		}
 	},
 	"Dashboard": {
