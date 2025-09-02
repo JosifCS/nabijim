@@ -5,6 +5,7 @@ import { auth0 } from "@/lib/auth0"
 import { LocaleSelect } from "./locale-select"
 import { UserMenu } from "./user-menu"
 import Link from "next/link"
+import { isAdmin } from "@/modules/auth"
 
 export async function Header() {
 	const session = await auth0.getSession()
@@ -31,6 +32,7 @@ export async function Header() {
 						/>
 						{session ? (
 							<UserMenu
+								isAdmin={isAdmin(session.user.email ?? "")}
 								messages={{
 									userName:
 										session.user.name ??
@@ -39,6 +41,7 @@ export async function Header() {
 									logout: t("logout"),
 									myAccount: t("myAccount"),
 									settings: t("settings"),
+									administration: t("administration"),
 								}}
 							/>
 						) : (

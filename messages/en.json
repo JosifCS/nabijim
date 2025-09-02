@@ -28,7 +28,8 @@
 			"logout": "Log out",
 			"localeSelect": "Language selection",
 			"settings": "Settings",
-			"myAccount": "My account"
+			"myAccount": "My account",
+			"administration": "Administration"
 		},
 		"PrivateStations": {
 			"chargeDescription": "Add your home charging station and other private stations.",
@@ -82,5 +83,9 @@
 			"settings": "Settings",
 			"description": "Manage your stations, charging prices and more"
 		}
+	},
+	"Administration": {
+		"administration": "Administration",
+		"description": "Page for system administrators only."
 	}
 }

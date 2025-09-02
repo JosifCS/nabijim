@@ -28,7 +28,8 @@
 			"logout": "Odhlásti se",
 			"localeSelect": "Výběr jazyka",
 			"settings": "Nastavení",
-			"myAccount": "Můj účet"
+			"myAccount": "Můj účet",
+			"administration": "Administrace"
 		},
 		"PrivateStations": {
 			"chargeDescription": "Přidejte svou domací nabíjecí stanici a další soukromé stanice.",
@@ -82,5 +83,9 @@
 			"settings": "Nastavení",
 			"description": "Spravujte své stanice, ceny nabíjení a další"
 		}
+	},
+	"Administration": {
+		"administration": "Administrace",
+		"description": "Stránka pouze pro správce systému."
 	}
 }

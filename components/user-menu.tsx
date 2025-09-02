@@ -15,13 +15,13 @@ import Link from "next/link"
 
 export function UserMenu({
 	messages,
+	isAdmin,
 }: {
-	messages: {
-		logout: string
-		userName: string
-		myAccount: string
-		settings: string
-	}
+	messages: Record<
+		"logout" | "userName" | "myAccount" | "settings" | "administration",
+		string
+	>
+	isAdmin: boolean
 }) {
 	return (
 		<DropdownMenu>
@@ -39,6 +39,13 @@ export function UserMenu({
 					<DropdownMenuItem asChild>
 						<Link href="/user/settings">{messages.settings}</Link>
 					</DropdownMenuItem>
+					{isAdmin && (
+						<DropdownMenuItem asChild>
+							<Link href="/administration">
+								{messages.administration}
+							</Link>
+						</DropdownMenuItem>
+					)}
 				</DropdownMenuGroup>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem asChild>

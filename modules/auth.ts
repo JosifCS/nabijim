@@ -1,23 +1,30 @@
 import { auth0 } from "@/lib/auth0"
 import prisma from "@/lib/prisma"
-import { redirect } from "next/navigation"
+import { notFound, redirect } from "next/navigation"
 
-export async function authorize() {
+export async function authorize(admin: boolean = false) {
 	const session = await auth0.getSession()
 
 	if (session) {
 		const user = await getUser(session.user.email!)
-		const admins: string[] = JSON.parse(process.env.ADMINS ?? "[]")
+		const isAmin = isAdmin(user.email)
+
+		if (admin && !isAmin) notFound()
 
 		return {
 			email: user.email,
 			id: user.id,
 			nickname: session.user.nickname!,
-			admin: admins.includes(user.email),
+			isAmin,
 		}
 	}
 
 	redirect("/auth/login")
+}
+
+export function isAdmin(email: string) {
+	const admins: string[] = JSON.parse(process.env.ADMINS ?? "[]")
+	return admins.includes(email)
 }
 
 async function getUser(email: string) {
