@@ -7,8 +7,8 @@ import { useTranslations } from "next-intl"
 
 export type TableListProps = React.ComponentProps<"div"> & {
 	count: number
-	emptyLabel?: string
-	emptyIcon?: ReactNode
+	emptyLabel: string
+	emptyIcon: ReactNode
 }
 
 export function TableList({
@@ -19,7 +19,7 @@ export function TableList({
 	className,
 	...props
 }: TableListProps) {
-	if (count === 0 && emptyLabel)
+	if (count === 0)
 		return (
 			<div
 				className={cn(

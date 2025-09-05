@@ -36,8 +36,6 @@
 			"stations": "Own charging station",
 			"noStations": "You don't have any charging stations of your own yet.",
 			"addStation": "Add station",
-			"edit": "Edit",
-			"remove": "Delete",
 			"address": "Address",
 			"priceKwh": "Price per KWh"
 		},
@@ -46,8 +44,6 @@
 			"description": "Each station can have one or more charging connectors.",
 			"addConnector": "Add connector",
 			"noConnectors": "No charging connectors",
-			"edit": "Edit",
-			"remove": "Remove",
 			"priceKwh": "Price per KWh",
 			"needCable": "Need your own cable"
 		},
@@ -56,10 +52,14 @@
 			"providersDesc": "Operators of public charging stations.",
 			"addProvider": "Add operator",
 			"noProviders": "No operators",
-			"edit": "Edit",
-			"remove": "Delete",
 			"stations": "Number of charging stations",
 			"stationsCount": "{count} charging stations"
+		},
+		"Common": {
+			"TableList": {
+				"edit": "Edit",
+				"remove": "Remove"
+			}
 		}
 	},
 	"Dashboard": {

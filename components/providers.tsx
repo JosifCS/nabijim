@@ -1,10 +1,9 @@
-import { ButtonLink } from "@/components/common/button-link"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import prisma from "@/lib/prisma"
-import { Building2, Edit, Plus, Trash2, Zap } from "lucide-react"
+import { Building2, Plus, Zap } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 import { Skeleton } from "./ui/skeleton"
+import { TableList, TableListItem } from "./common/table-list"
 
 export async function Providers() {
 	const t = await getTranslations("Components.Providers")
@@ -24,62 +23,30 @@ export async function Providers() {
 				btnIcon={<Plus />}
 			/>
 			<CardContent className="flex flex-col gap-2">
-				{providers.length === 0 ? (
-					<div className="text-center py-8 text-gray-500 dark:text-gray-400">
-						<Building2 className="h-12 w-12 mx-auto mb-4 opacity-50" />
-						<p>{t("noProviders")}</p>
-					</div>
-				) : (
-					<div className="grid gap-4">
-						{providers.map((x) => (
-							<div
-								key={x.id}
-								className="flex items-center justify-between p-4 border border-emerald-200 dark:border-emerald-800 rounded-lg bg-emerald-50/50 dark:bg-emerald-900/20"
+				<TableList
+					count={providers.length}
+					emptyIcon={<Building2 />}
+					emptyLabel={t("noProviders")}
+				>
+					{providers.map((x) => (
+						<TableListItem
+							key={x.id}
+							title={x.name}
+							icon={<Building2 />}
+							editHref={`/administration/provider?id=${x.id}`}
+						>
+							<span
+								className="flex items-center gap-1"
+								title={t("stations")}
 							>
-								<div className="flex items-center gap-3">
-									<div className="p-2 bg-emerald-100 dark:bg-emerald-800 rounded-full">
-										<Building2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-									</div>
-									<div>
-										<h3 className="font-semibold text-emerald-800 dark:text-emerald-200">
-											{x.name}
-										</h3>
-										<div className="flex items-center gap-4 text-sm text-emerald-600 dark:text-emerald-400">
-											<span
-												className="flex items-center gap-1"
-												title={t("stations")}
-											>
-												<Zap className="h-3 w-3" />
-												{t("stationsCount", {
-													count: x.stations.length,
-												})}
-											</span>
-										</div>
-									</div>
-								</div>
-								<div className="flex items-center gap-2">
-									<ButtonLink
-										href={`/administration/provider?id=${x.id}`}
-										variant="outline"
-										size="sm"
-										title={t("edit")}
-										className="border-emerald-300 text-emerald-700 hover:bg-emerald-50 dark:border-emerald-700 dark:text-emerald-300"
-									>
-										<Edit className="h-4 w-4" />
-									</ButtonLink>
-									<Button
-										variant="outline"
-										size="sm"
-										title={t("remove")}
-										className="border-red-300 text-red-700 hover:bg-red-50 dark:border-red-700 dark:text-red-300"
-									>
-										<Trash2 className="h-4 w-4" />
-									</Button>
-								</div>
-							</div>
-						))}
-					</div>
-				)}
+								<Zap className="h-3 w-3" />
+								{t("stationsCount", {
+									count: x.stations.length,
+								})}
+							</span>
+						</TableListItem>
+					))}
+				</TableList>
 			</CardContent>
 		</Card>
 	)

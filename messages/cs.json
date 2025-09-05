@@ -36,8 +36,6 @@
 			"stations": "Vlastní nabíjecí stanice",
 			"noStations": "Zatím nemáte žádné vlastní nabíjecí stanice",
 			"addStation": "Přidat stanici",
-			"edit": "Upravit",
-			"remove": "Smazat",
 			"address": "Adresa",
 			"priceKwh": "Cena za KWh"
 		},
@@ -46,8 +44,6 @@
 			"description": "Každá stanice může mít jeden nebo více nabíjecích konektorů.",
 			"addConnector": "Přidat konektor",
 			"noConnectors": "Žádné nabíjecí konektory",
-			"edit": "Upravit",
-			"remove": "Odstranit",
 			"priceKwh": "Cena za KWh",
 			"needCable": "Potřeba vlastní kabel"
 		},
@@ -56,10 +52,14 @@
 			"providersDesc": "Provozovatelé veřejných dobíjecích stanic.",
 			"addProvider": "Přidat provozovatele",
 			"noProviders": "Žádní provozovatelé",
-			"edit": "Upravit",
-			"remove": "Smazat",
 			"stations": "Počet nabíjecích stanic",
 			"stationsCount": "{count} dobíjecích stanic"
+		},
+		"Common": {
+			"TableList": {
+				"edit": "Upravit",
+				"remove": "Odstranit"
+			}
 		}
 	},
 	"Dashboard": {
