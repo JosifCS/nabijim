@@ -1,12 +1,6 @@
 import { ButtonLink } from "@/components/common/button-link"
 import { Button } from "@/components/ui/button"
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card"
+import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import prisma from "@/lib/prisma"
 import { addressString } from "@/modules/utils"
 import { Edit, MapPin, Plus, Trash2, Zap } from "lucide-react"
@@ -23,23 +17,14 @@ export async function PrivateStations({ userId }: { userId: number }) {
 
 	return (
 		<Card>
-			<CardHeader>
-				<div className="flex items-center justify-between">
-					<div>
-						<CardTitle className="flex items-center gap-2">
-							<Zap className="h-5 w-5 text-emerald-600" />
-							{t("stations")}
-						</CardTitle>
-						<CardDescription>
-							{t("chargeDescription")}
-						</CardDescription>
-					</div>
-					<ButtonLink href="/user/settings/station">
-						<Plus className="h-4 w-4 mr-2" />
-						{t("addStation")}
-					</ButtonLink>
-				</div>
-			</CardHeader>
+			<CardHeader
+				title={t("stations")}
+				description={t("chargeDescription")}
+				icon={<Zap />}
+				btnLabel={t("addStation")}
+				btnIcon={<Plus />}
+				btnHref="/user/settings/station"
+			/>
 			<CardContent className="flex flex-col gap-2">
 				{stations.length === 0 ? (
 					<div className="text-center py-8 text-gray-500 dark:text-gray-400">
@@ -114,20 +99,12 @@ export async function PrivateStationsSkeleton() {
 
 	return (
 		<Card>
-			<CardHeader>
-				<div className="flex items-center justify-between">
-					<div>
-						<CardTitle className="flex items-center gap-2">
-							<Zap className="h-5 w-5 text-emerald-600" />
-							{t("stations")}
-						</CardTitle>
-						<CardDescription>
-							{t("chargeDescription")}
-						</CardDescription>
-					</div>
-					<Skeleton className="h-9 w-32" />
-				</div>
-			</CardHeader>
+			<CardHeader
+				title={t("stations")}
+				description={t("chargeDescription")}
+				icon={<Zap />}
+				btnSkeleton="w-32"
+			/>
 			<CardContent className="flex flex-col gap-2">
 				{[0, 1, 2].map((x) => (
 					<div

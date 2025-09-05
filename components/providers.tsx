@@ -1,12 +1,6 @@
 import { ButtonLink } from "@/components/common/button-link"
 import { Button } from "@/components/ui/button"
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card"
+import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import prisma from "@/lib/prisma"
 import { Building2, Edit, Plus, Trash2, Zap } from "lucide-react"
 import { getTranslations } from "next-intl/server"
@@ -21,21 +15,14 @@ export async function Providers() {
 
 	return (
 		<Card>
-			<CardHeader>
-				<div className="flex items-center justify-between">
-					<div>
-						<CardTitle className="flex items-center gap-2">
-							<Building2 className="h-5 w-5 text-emerald-600" />
-							{t("providers")}
-						</CardTitle>
-						<CardDescription>{t("providersDesc")}</CardDescription>
-					</div>
-					<ButtonLink href="/administration/provider">
-						<Plus className="h-4 w-4 mr-2" />
-						{t("addProvider")}
-					</ButtonLink>
-				</div>
-			</CardHeader>
+			<CardHeader
+				title={t("providers")}
+				description={t("providersDesc")}
+				icon={<Building2 />}
+				btnLabel={t("addProvider")}
+				btnHref="/administration/provider"
+				btnIcon={<Plus />}
+			/>
 			<CardContent className="flex flex-col gap-2">
 				{providers.length === 0 ? (
 					<div className="text-center py-8 text-gray-500 dark:text-gray-400">
@@ -103,18 +90,12 @@ export async function ProvidersSkeleton() {
 
 	return (
 		<Card>
-			<CardHeader>
-				<div className="flex items-center justify-between">
-					<div>
-						<CardTitle className="flex items-center gap-2">
-							<Building2 className="h-5 w-5 text-emerald-600" />
-							{t("providers")}
-						</CardTitle>
-						<CardDescription>{t("providersDesc")}</CardDescription>
-					</div>
-					<Skeleton className="h-9 w-32" />
-				</div>
-			</CardHeader>
+			<CardHeader
+				title={t("providers")}
+				description={t("providersDesc")}
+				icon={<Building2 />}
+				btnSkeleton="w-32"
+			/>
 			<CardContent className="flex flex-col gap-2">
 				{[0, 1, 2].map((x) => (
 					<div
