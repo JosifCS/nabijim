@@ -81,7 +81,11 @@
 				"CHADEMO": "CHAdeMO (Japonsko)",
 				"TESLA": "Tesla",
 				"GB_T": "GB/T (Čína)"
-			}
+			},
+			"power": "Výkon (kW)",
+			"type": "Typ konektoru",
+			"needCable": "Vlastní kabel",
+			"needCableDesc": "Nabíjecí místo není vybaveno kabelem."
 		}
 	},
 	"Dashboard": {

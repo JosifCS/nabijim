@@ -7,6 +7,9 @@ import { EMPTY_CONNECTOR } from "@/modules/empty-data"
 import { Label } from "./ui/label"
 import { FormSelect } from "./common/form-select"
 import { editConnector } from "@/actions/edit-connector"
+import { CONNECTORS } from "@/modules/connectors"
+import { FormCheckbox } from "./common/form-checkbox"
+import { ConnectorPowerInput } from "./connector-power-input"
 
 export async function ConnectorForm({
 	connectorId,
@@ -25,8 +28,22 @@ export async function ConnectorForm({
 		<Form action={editConnector}>
 			<FormSelect
 				name="type"
+				placeholder={t("type")}
 				defaultValue={connector.type}
-				options={[{ value: "TYPE_2" }]}
+				options={CONNECTORS.map((x) => ({
+					value: x,
+					label: t(`Connector.${x}` as never),
+				}))}
+			/>
+			<ConnectorPowerInput
+				label={t("power")}
+				defaultValue={connector.power}
+			/>
+			<FormCheckbox
+				name="needCable"
+				label={t("needCable")}
+				description={t("needCableDesc")}
+				defaultValue={connector.needCable}
 			/>
 		</Form>
 	)

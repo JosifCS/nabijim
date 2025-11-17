@@ -81,7 +81,11 @@
 				"CHADEMO": "CHAdeMO (Japan)",
 				"TESLA": "Tesla",
 				"GB_T": "GB/T (China)"
-			}
+			},
+			"power": "Power (kW)",
+			"type": "Connector type",
+			"needCable": "Custom cable",
+			"needCableDesc": "The charging point is not equipped with a cable."
 		}
 	},
 	"Dashboard": {
