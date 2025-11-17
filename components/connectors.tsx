@@ -12,6 +12,7 @@ import {
 import { getTranslations } from "next-intl/server"
 import { Skeleton } from "./ui/skeleton"
 import { TableList, TableListItem } from "./common/table-list"
+import { removeConnector } from "@/actions/remove-connector"
 
 export async function Connectors({ stationId }: { stationId: number }) {
 	const t = await getTranslations()
@@ -52,6 +53,8 @@ export async function Connectors({ stationId }: { stationId: number }) {
 								)}
 								icon={<Icon />}
 								editHref={`/user/settings/dialog/connector?id=${x.id}&stationId=${stationId}`}
+								actionId={x.id}
+								removeAction={removeConnector}
 							>
 								<span title={t("Components.Connectors.power")}>
 									{x.power} kW
