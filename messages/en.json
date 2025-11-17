@@ -60,6 +60,9 @@
 				"edit": "Edit",
 				"remove": "Remove"
 			}
+		},
+		"StationForm": {
+			"station": "Charging station"
 		}
 	},
 	"Dashboard": {
@@ -97,5 +100,11 @@
 	"Administration": {
 		"administration": "Administration",
 		"description": "Page for system administrators only."
+	},
+	"Actions": {
+		"EditPrivateStation": {
+			"created": "New charging station created",
+			"saved": "Changes saved"
+		}
 	}
 }
