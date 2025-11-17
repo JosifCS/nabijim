@@ -1,4 +1,4 @@
-import { GetPrivateStation, GetProvider } from "./queries"
+import { GetConnector, GetPrivateStation, GetProvider } from "./queries"
 
 export const EMPTY_PRIVATE_STATION: GetPrivateStation = {
 	id: 0,
@@ -7,7 +7,7 @@ export const EMPTY_PRIVATE_STATION: GetPrivateStation = {
 	serialNumber: null,
 	name: String.Empty,
 	chargingHubId: 0,
-	connectors: [],
+	// connectors: [],
 	chargingHub: {
 		id: 0,
 		email: null,
@@ -34,4 +34,14 @@ export const EMPTY_PROVIDER: GetProvider = {
 	phoneNumber: null,
 	url: null,
 	importSchema: null,
+}
+
+export const EMPTY_CONNECTOR: GetConnector = {
+	id: 0,
+	dc: false,
+	needCable: false,
+	power: 11,
+	stationId: 0,
+	tariffs: [],
+	type: "TYPE_2",
 }

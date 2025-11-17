@@ -7,7 +7,18 @@ export async function getPrivateStation(userId: number, id: number) {
 		where: { id, private: { userId } },
 		include: {
 			chargingHub: true,
-			connectors: true,
+			//connectors: true,
+		},
+	})
+}
+
+export type GetConnector = Awaited<ReturnType<typeof getConnector>>
+
+export async function getConnector(id: number) {
+	return await prisma.connector.findFirst({
+		where: { id },
+		include: {
+			tariffs: true,
 		},
 	})
 }
