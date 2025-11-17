@@ -60,6 +60,9 @@
 				"edit": "Upravit",
 				"remove": "Odstranit"
 			}
+		},
+		"StationForm": {
+			"station": "Nabíjecí stanice"
 		}
 	},
 	"Dashboard": {
@@ -97,5 +100,11 @@
 	"Administration": {
 		"administration": "Administrace",
 		"description": "Stránka pouze pro správce systému."
+	},
+	"Actions": {
+		"EditPrivateStation": {
+			"created": "Nová nabíjecí stanice vytvořena",
+			"saved": "Změny uloženy"
+		}
 	}
 }
