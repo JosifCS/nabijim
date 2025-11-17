@@ -27,7 +27,7 @@ export async function Connectors({ stationId }: { stationId: number }) {
 				description={t("description")}
 				icon={<PlugZap />}
 				btnLabel={t("addConnector")}
-				btnHref="/user/settings/station"
+				btnHref={`/user/settings/dialog/connector?stationId=${stationId}`}
 				btnIcon={<Plus />}
 			/>
 			<CardContent className="flex flex-col gap-2">
