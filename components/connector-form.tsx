@@ -27,6 +27,7 @@ export async function ConnectorForm({
 
 	return (
 		<Form action={editConnector}>
+			<input name="id" defaultValue={connector.id} hidden />
 			<input name="stationId" defaultValue={stationId} hidden />
 			<FormSelect
 				name="type"

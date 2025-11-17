@@ -30,13 +30,25 @@ export function ConnectorPowerInput({
 				max={5000}
 			/>
 			<div className="flex gap-2">
-				<Button variant="outline" onClick={() => setValue("11")}>
+				<Button
+					type="button"
+					variant="outline"
+					onClick={() => setValue("11")}
+				>
 					11 kW
 				</Button>
-				<Button variant="outline" onClick={() => setValue("50")}>
+				<Button
+					type="button"
+					variant="outline"
+					onClick={() => setValue("50")}
+				>
 					50 kW
 				</Button>
-				<Button variant="outline" onClick={() => setValue("200")}>
+				<Button
+					type="button"
+					variant="outline"
+					onClick={() => setValue("200")}
+				>
 					200 kW
 				</Button>
 			</div>
