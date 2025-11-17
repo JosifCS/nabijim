@@ -21,6 +21,7 @@ model User {
   chargeSessions    ChargeSession[]
   privateStations   PrivateStation[]
   favoriteStations  PublicStation[]
+  chargeTariffs     ChargeTariff[]
 
   @@map("users")
 }
@@ -134,6 +135,8 @@ model Connector {
 model ChargeTariff {
   id         Int @id @default(autoincrement())
   name       String?
+  user       User? @relation(fields: [userId], references: [id])
+  userId     Int?
   validFrom  DateTime
   validTo    DateTime?
   times      TariffTime[]
