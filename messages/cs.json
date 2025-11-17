@@ -128,6 +128,10 @@
 		"EditPrivateStation": {
 			"created": "Nová nabíjecí stanice vytvořena",
 			"saved": "Změny uloženy"
+		},
+		"EditConnector": {
+			"saved": "Změny uloženy",
+			"created": "Konektor vytvořen"
 		}
 	}
 }

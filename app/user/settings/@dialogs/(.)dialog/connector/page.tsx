@@ -28,7 +28,10 @@ export default async function Page({
 			description={`Nabíjecí stanice ${station.name}`}
 		>
 			<Suspense fallback={<ConnectorFormSkeleton />}>
-				<ConnectorForm connectorId={Number(id)} />
+				<ConnectorForm
+					connectorId={Number(id)}
+					stationId={Number(stationId)}
+				/>
 			</Suspense>
 		</Dialog>
 	)

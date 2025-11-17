@@ -12,8 +12,10 @@ import { ConnectorPowerInput } from "./connector-power-input"
 
 export async function ConnectorForm({
 	connectorId,
+	stationId,
 }: {
 	connectorId: number | null
+	stationId: number
 }) {
 	const t = await getTranslations("Components.ConnectorForm")
 
@@ -25,6 +27,7 @@ export async function ConnectorForm({
 
 	return (
 		<Form action={editConnector}>
+			<input name="stationId" defaultValue={stationId} hidden />
 			<FormSelect
 				name="type"
 				placeholder={t("type")}

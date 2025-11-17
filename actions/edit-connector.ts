@@ -8,26 +8,38 @@ import { authorize } from "@/modules/auth"
 import { actionResult } from "@/modules/action-result"
 import { revalidatePath } from "next/cache"
 import { getTranslations } from "next-intl/server"
+import { CONNECTORS } from "@/modules/connectors"
 
 const schema = zfd.formData({
 	id: z.number().optional(),
+	stationId: zfd.numeric(z.number()),
+	type: zfd.text(z.enum(CONNECTORS)),
+	power: zfd.numeric(),
+	needCable: zfd.checkbox(),
 })
-export const editConnector = safeAction(schema, async function ({ id }) {
-	const user = await authorize()
-	const t = await getTranslations("Actions.EditConnector")
+export const editConnector = safeAction(
+	schema,
+	async function ({ id, needCable, power, type, stationId }) {
+		await authorize()
+		const t = await getTranslations("Actions.EditConnector")
 
-	if (id) {
-		await prisma.connector.update({
-			where: { id: id },
-			data: {},
-		})
-		revalidatePath("/user/settings/station")
-		return actionResult(true, t("saved"))
-	} else {
-		const { id } = await prisma.connector.create({
-			data: {},
-		})
-		revalidatePath("/user/settings/station")
-		return actionResult(`/user/settings/station?id=${id}`, t("created"))
+		const dc = type == "CHADEMO" || type == "CCS1" || type == "CCS2"
+
+		if (id) {
+			await prisma.connector.update({
+				where: { id: id },
+				data: { needCable, power, type, dc },
+			})
+		} else {
+			await prisma.connector.create({
+				data: { dc, needCable, power, type, stationId },
+			})
+		}
+
+		revalidatePath(`/user/settings/station?id=${stationId}`)
+		return actionResult(
+			`/user/settings/station?id=${stationId}`,
+			id ? t("saved") : t("created")
+		)
 	}
-})
+)
