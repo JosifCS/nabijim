@@ -6,6 +6,8 @@ import { z } from "zod"
 import prisma from "@/lib/prisma"
 import { authorize } from "@/modules/auth"
 import { actionResult } from "@/modules/action-result"
+import { revalidatePath } from "next/cache"
+import { getTranslations } from "next-intl/server"
 
 const schema = zfd.formData({
 	id: zfd.numeric().optional(),
@@ -22,6 +24,7 @@ export const editPrivateStation = safeAction(
 	schema,
 	async function ({ id, city, name, street, houseNumber, streetNumber }) {
 		const user = await authorize()
+		const t = await getTranslations("Actions.EditPrivateStation")
 
 		if (id) {
 			await prisma.station.update({
@@ -38,9 +41,10 @@ export const editPrivateStation = safeAction(
 					},
 				},
 			})
-			return actionResult(true, "saved", `/user/settings`)
+			revalidatePath("/user/settings/station")
+			return actionResult(true, t("saved"))
 		} else {
-			await prisma.station.create({
+			const { id } = await prisma.station.create({
 				data: {
 					private: { create: { userId: user.id } },
 					name,
@@ -54,7 +58,8 @@ export const editPrivateStation = safeAction(
 					},
 				},
 			})
-			return actionResult(true, "created", `/user/settings`)
+			revalidatePath("/user/settings/station")
+			return actionResult(`/user/settings/station?id=${id}`, t("created"))
 		}
 	}
 )
