@@ -4,6 +4,8 @@ import { useId } from "react"
 import { useFormContext } from "./form"
 import { Label } from "../ui/label"
 import { Checkbox } from "../ui/checkbox"
+import { Skeleton } from "../ui/skeleton"
+import { cn } from "@/lib/utils"
 
 type FormCheckboxProps = {
 	label?: string
@@ -13,6 +15,7 @@ type FormCheckboxProps = {
 	defaultValue?: boolean
 	name?: string
 	className?: string
+	skeleton?: boolean
 	onChange?: (value: boolean) => void
 }
 
@@ -25,9 +28,12 @@ export function FormCheckbox({
 	className,
 	defaultValue,
 	description,
+	skeleton,
 }: FormCheckboxProps) {
 	const form = useFormContext()
 	const id = useId()
+
+	if (skeleton) return <Skeleton className={cn("w-full, h-10", className)} />
 
 	return (
 		<div className="grid w-full items-center gap-1.5">

@@ -1,8 +1,12 @@
 import { Dialog } from "@/components/common/dialog"
 
-import { ConnectorForm } from "@/components/connector-form"
+import {
+	ConnectorForm,
+	ConnectorFormSkeleton,
+} from "@/components/connector-form"
 import prisma from "@/lib/prisma"
 import { notFound } from "next/navigation"
+import { Suspense } from "react"
 
 export default async function Page({
 	searchParams,
@@ -23,7 +27,9 @@ export default async function Page({
 			title={"Upravit nabíjecí konektor"}
 			description={`Nabíjecí stanice ${station.name}`}
 		>
-			<ConnectorForm connectorId={Number(id)} />
+			<Suspense fallback={<ConnectorFormSkeleton />}>
+				<ConnectorForm connectorId={Number(id)} />
+			</Suspense>
 		</Dialog>
 	)
 }

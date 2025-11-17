@@ -4,7 +4,6 @@ import { Form, FormSkeleton } from "./common/form"
 import { getConnector } from "@/modules/queries"
 
 import { EMPTY_CONNECTOR } from "@/modules/empty-data"
-import { Label } from "./ui/label"
 import { FormSelect } from "./common/form-select"
 import { editConnector } from "@/actions/edit-connector"
 import { CONNECTORS } from "@/modules/connectors"
@@ -49,23 +48,12 @@ export async function ConnectorForm({
 	)
 }
 
-export async function StationFormSkeleton() {
-	const t = await getTranslations("Components.ConnectorForm")
-
+export async function ConnectorFormSkeleton() {
 	return (
 		<FormSkeleton>
 			<FormInput skeleton />
-			<Label>Adresa</Label>
-			<div className="grid sm:grid-cols-[1fr_10rem_10rem] grid-cols- gap-2">
-				<FormInput skeleton />
-				<FormInput skeleton />
-				<FormInput skeleton />
-			</div>
-			<div className="grid sm:grid-cols-[8rem_1fr_10rem] grid-cols- gap-2">
-				<FormInput skeleton />
-				<FormInput skeleton />
-				<FormInput skeleton />
-			</div>
+			<FormInput skeleton />
+			<FormCheckbox skeleton />
 		</FormSkeleton>
 	)
 }
