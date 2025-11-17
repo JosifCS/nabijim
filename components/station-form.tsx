@@ -23,7 +23,7 @@ export async function StationForm({ stationId }: { stationId: number | null }) {
 		<Card>
 			<CardHeader
 				title={t("station")}
-				// description={t("description")}
+				description={t("privateStation")}
 				icon={<EvCharger />}
 			/>
 			<CardContent>

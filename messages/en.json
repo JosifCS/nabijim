@@ -69,7 +69,8 @@
 			"streetNumber": "Street number",
 			"houseNumber": "House number",
 			"postalCode": "Zip code",
-			"country": "Country"
+			"country": "Country",
+			"privateStation": "Setting up a private charging station."
 		}
 	},
 	"Dashboard": {

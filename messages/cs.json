@@ -33,8 +33,8 @@
 		},
 		"PrivateStations": {
 			"chargeDescription": "Přidejte svou domací nabíjecí stanici a další soukromé stanice.",
-			"stations": "Vlastní nabíjecí stanice",
-			"noStations": "Zatím nemáte žádné vlastní nabíjecí stanice",
+			"stations": "Soukromé nabíjecí stanice",
+			"noStations": "Zatím nemáte žádné soukromé nabíjecí stanice",
 			"addStation": "Přidat stanici",
 			"address": "Adresa",
 			"priceKwh": "Cena za KWh"
@@ -69,7 +69,8 @@
 			"streetNumber": "Číslo orientační",
 			"houseNumber": "Číslo popisné",
 			"postalCode": "PSČ",
-			"country": "Stát"
+			"country": "Stát",
+			"privateStation": "Nastavení soukromé nabíjecí stanice."
 		}
 	},
 	"Dashboard": {
