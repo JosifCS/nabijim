@@ -2,14 +2,14 @@ import { z } from "zod"
 import { ActionResult } from "./action-result"
 
 export type SafeActionResult = {
-	result: ActionResult
-	prevState: any | null
+	result: ActionResult<object>
+	prevState: unknown | null
 	validationErrors: Record<string, string>
 }
 
 export function safeAction<S extends object, SchemaType extends z.ZodTypeAny>(
 	schema: SchemaType,
-	action: (data: z.output<SchemaType>) => Promise<ActionResult>
+	action: (data: z.output<SchemaType>) => Promise<ActionResult<object | null>>
 ) {
 	return async function handler(currentState: S, formData: FormData) {
 		console.log(currentState, formData)
@@ -32,7 +32,7 @@ export function safeAction<S extends object, SchemaType extends z.ZodTypeAny>(
 				validationErrors: formatIssues(error),
 				result,
 			}
-		} catch (e: unknown) {
+		} catch {
 			console.log("ERRRROR-----------")
 		}
 
@@ -47,7 +47,7 @@ export function safeAction<S extends object, SchemaType extends z.ZodTypeAny>(
 }
 
 function parseForm(formData: FormData) {
-	var object: any = {}
+	const object: Record<string, FormDataEntryValue | FormDataEntryValue[]> = {}
 	formData.forEach((value, key) => {
 		// přeskakuji data doplněná reactem
 		if (key.at(0) == "$") return
@@ -65,11 +65,13 @@ function parseForm(formData: FormData) {
 	return object
 }
 
-function formatIssues(errors: z.ZodError<z.input<any>> | undefined) {
-	let object: any = {}
+function formatIssues<SchemaType extends z.ZodTypeAny>(
+	errors: z.ZodError<z.output<SchemaType>> | undefined
+) {
+	const object: Record<string, string> = {}
 
 	errors?.issues.forEach((issue) => {
-		object[issue.path.at(0) ?? ""] = issue.message
+		object[(issue.path.at(0) as string) ?? ""] = issue.message
 	})
 
 	return object
