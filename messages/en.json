@@ -93,6 +93,12 @@
 			"type": "Connector type",
 			"needCable": "Custom cable",
 			"needCableDesc": "The charging point is not equipped with a cable."
+		},
+		"PrivateTariffs": {
+			"tariffs": "Private pricing plans",
+			"tariffsDescription": "Add your home electricity tariff and other private tariffs.",
+			"addTariff": "Add tariff",
+			"noTariffs": "No tariffs"
 		}
 	},
 	"Dashboard": {

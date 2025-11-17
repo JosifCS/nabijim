@@ -93,6 +93,12 @@
 			"type": "Typ konektoru",
 			"needCable": "Vlastní kabel",
 			"needCableDesc": "Nabíjecí místo není vybaveno kabelem."
+		},
+		"PrivateTariffs": {
+			"tariffs": "Soukromé tarify cen",
+			"tariffsDescription": "Přidejte svůj domací tarif za elektřinu a další soukromé tarify.",
+			"addTariff": "Přidat tarif",
+			"noTariffs": "Žádné tarify"
 		}
 	},
 	"Dashboard": {

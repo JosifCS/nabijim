@@ -3,6 +3,10 @@ import {
 	PrivateStations,
 	PrivateStationsSkeleton,
 } from "@/components/private-stations"
+import {
+	PrivateTariffs,
+	PrivateTariffsSkeleton,
+} from "@/components/private-tariffs"
 
 import { authorize } from "@/modules/auth"
 import { getTranslations } from "next-intl/server"
@@ -16,6 +20,9 @@ export default async function Page() {
 		<Container title={t("settings")} description={t("description")}>
 			<Suspense fallback={<PrivateStationsSkeleton />}>
 				<PrivateStations userId={user.id} />
+			</Suspense>
+			<Suspense fallback={<PrivateTariffsSkeleton />}>
+				<PrivateTariffs userId={user.id} />
 			</Suspense>
 		</Container>
 	)
