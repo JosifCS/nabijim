@@ -60,6 +60,12 @@
 			"TableList": {
 				"edit": "Edit",
 				"remove": "Remove"
+			},
+			"ButtonDelete": {
+				"cancel": "Cancel",
+				"continue": "Continue",
+				"title": "Do you really want to continue?",
+				"description": "Confirming the action will delete the item and it will no longer be possible to restore it."
 			}
 		},
 		"StationForm": {

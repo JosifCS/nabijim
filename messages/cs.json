@@ -60,6 +60,12 @@
 			"TableList": {
 				"edit": "Upravit",
 				"remove": "Odstranit"
+			},
+			"ButtonDelete": {
+				"cancel": "Zrušit",
+				"continue": "Pokračovat",
+				"title": "Opravdu chete pokračovat?",
+				"description": "Potvrzením akce dojde ke zmazání položky již ji nebude možné obnovit."
 			}
 		},
 		"StationForm": {
