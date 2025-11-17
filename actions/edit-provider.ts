@@ -47,7 +47,7 @@ export const editProvider = safeAction(
 					phoneNumber: phoneNumber?.length ? phoneNumber : null,
 				},
 			})
-			return actionResult(true, "saved", `/administration`)
+			return actionResult(`/administration`, "saved")
 		} else {
 			await prisma.provider.create({
 				data: {
@@ -60,7 +60,7 @@ export const editProvider = safeAction(
 					phoneNumber: phoneNumber?.length ? phoneNumber : null,
 				},
 			})
-			return actionResult(true, "created", `/administration`)
+			return actionResult(`/administration`, "created")
 		}
 	}
 )

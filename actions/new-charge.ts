@@ -32,9 +32,8 @@ export const newCharge = safeAction(
 		})
 
 		return actionResult(
-			true,
-			"created", // TODO localize
-			`/dashboard`
+			`/dashboard`,
+			"created" // TODO localize
 		)
 	}
 )
