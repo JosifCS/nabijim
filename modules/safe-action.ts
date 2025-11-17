@@ -2,8 +2,8 @@ import { z } from "zod"
 import { ActionResult } from "./action-result"
 
 export type SafeActionResult = {
-	result: ActionResult<object>
-	prevState: unknown | null
+	result: ActionResult<object | null>
+	prevState: Record<string, unknown> | null
 	validationErrors: Record<string, string>
 }
 
@@ -47,7 +47,7 @@ export function safeAction<S extends object, SchemaType extends z.ZodTypeAny>(
 }
 
 function parseForm(formData: FormData) {
-	const object: Record<string, FormDataEntryValue | FormDataEntryValue[]> = {}
+	const object: Record<string, unknown> = {}
 	formData.forEach((value, key) => {
 		// přeskakuji data doplněná reactem
 		if (key.at(0) == "$") return
@@ -56,11 +56,11 @@ function parseForm(formData: FormData) {
 		if (!Reflect.has(object, key)) {
 			object[key] = value
 			return
-		}
-		if (!Array.isArray(object[key])) {
+		} else if (!Array.isArray(object[key])) {
 			object[key] = [object[key]]
+		} else {
+			;(object[key] as unknown[]).push(value)
 		}
-		object[key].push(value)
 	})
 	return object
 }

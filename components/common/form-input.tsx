@@ -38,7 +38,8 @@ export function FormInput({
 					defaultValue={
 						props.type == "file"
 							? undefined
-							: form.prevState?.[name ?? "x"] ?? defaultValue
+							: (form.prevState?.[name ?? "x"] as string) ??
+							  defaultValue
 					}
 					onChange={form.onChange}
 					title={title ?? label ?? placeholder}

@@ -37,7 +37,8 @@ export function FormTextArea({
 					defaultValue={
 						props.type == "file"
 							? undefined
-							: form.prevState?.[name ?? "x"] ?? defaultValue
+							: (form.prevState?.[name ?? "x"] as string) ??
+							  defaultValue
 					}
 					onChange={form.onChange}
 					{...props}
