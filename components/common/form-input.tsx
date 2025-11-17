@@ -6,7 +6,6 @@ import { Input } from "../ui/input"
 import { Label } from "../ui/label"
 import { Skeleton } from "../ui/skeleton"
 import { cx } from "class-variance-authority"
-import { platform } from "os"
 
 type FormInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
 	label?: string
@@ -30,7 +29,7 @@ export function FormInput({
 			{label && <Label htmlFor={id}>{label}</Label>}
 			{skeleton ? (
 				<Skeleton
-					className={cx("h-10 w-full rounded-md", props.className)}
+					className={cx("h-9 w-full rounded-md", props.className)}
 				/>
 			) : (
 				<Input
