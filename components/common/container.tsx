@@ -10,7 +10,7 @@ export function Container({
 	description: string
 }) {
 	return (
-		<div className="container mx-auto px-4 py-8 max-w-4xl">
+		<div className="container mx-auto px-4 py-8 max-w-4xl space-y-4">
 			<div className="mb-4">
 				<h1 className="text-3xl font-bold text-emerald-800 dark:text-emerald-200 mb-2">
 					{title}
