@@ -11,7 +11,7 @@ import { getTranslations } from "next-intl/server"
 import { CONNECTORS } from "@/modules/connectors"
 
 const schema = zfd.formData({
-	id: z.number().optional(),
+	id: zfd.numeric(z.number().optional()),
 	stationId: zfd.numeric(z.number()),
 	type: zfd.text(z.enum(CONNECTORS)),
 	power: zfd.numeric(),
