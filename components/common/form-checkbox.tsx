@@ -43,6 +43,7 @@ export function FormCheckbox({
 					defaultChecked={defaultValue}
 					checked={value}
 					className={className}
+					name={name}
 					onChange={
 						onChange
 							? () => {
