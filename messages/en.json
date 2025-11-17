@@ -71,6 +71,17 @@
 			"postalCode": "Zip code",
 			"country": "Country",
 			"privateStation": "Setting up a private charging station."
+		},
+		"ConnectorForm": {
+			"Connector": {
+				"TYPE_1": "Type 1 (USA)",
+				"TYPE_2": "Type 2 (EU)",
+				"CCS1": "CCS1 (USA)",
+				"CCS2": "CCS2 (EU)",
+				"CHADEMO": "CHAdeMO (Japan)",
+				"TESLA": "Tesla",
+				"GB_T": "GB/T (China)"
+			}
 		}
 	},
 	"Dashboard": {

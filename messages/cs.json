@@ -71,6 +71,17 @@
 			"postalCode": "PSČ",
 			"country": "Stát",
 			"privateStation": "Nastavení soukromé nabíjecí stanice."
+		},
+		"ConnectorForm": {
+			"Connector": {
+				"TYPE_1": "Typ 1 (USA)",
+				"TYPE_2": "Typ 2 (EU)",
+				"CCS1": "CCS1 (USA)",
+				"CCS2": "CCS2 (EU)",
+				"CHADEMO": "CHAdeMO (Japonsko)",
+				"TESLA": "Tesla",
+				"GB_T": "GB/T (Čína)"
+			}
 		}
 	},
 	"Dashboard": {
