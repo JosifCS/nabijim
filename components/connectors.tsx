@@ -14,7 +14,7 @@ import { Skeleton } from "./ui/skeleton"
 import { TableList, TableListItem } from "./common/table-list"
 
 export async function Connectors({ stationId }: { stationId: number }) {
-	const t = await getTranslations("Components.Connectors")
+	const t = await getTranslations()
 
 	const connectors = await prisma.connector.findMany({
 		where: { stationId },
@@ -23,17 +23,17 @@ export async function Connectors({ stationId }: { stationId: number }) {
 	return (
 		<Card>
 			<CardHeader
-				title={t("connectors")}
-				description={t("description")}
+				title={t("Components.Connectors.connectors")}
+				description={t("Components.Connectors.description")}
 				icon={<PlugZap />}
-				btnLabel={t("addConnector")}
+				btnLabel={t("Components.Connectors.addConnector")}
 				btnHref={`/user/settings/dialog/connector?stationId=${stationId}`}
 				btnIcon={<Plus />}
 			/>
 			<CardContent className="flex flex-col gap-2">
 				<TableList
 					count={connectors.length}
-					emptyLabel={t("noConnectors")}
+					emptyLabel={t("Components.Connectors.noConnectors")}
 					emptyIcon={<Zap />}
 				>
 					{connectors.map((x) => {
@@ -47,17 +47,19 @@ export async function Connectors({ stationId }: { stationId: number }) {
 						return (
 							<TableListItem
 								key={x.id}
-								title={`${x.dc ? "DC" : "AC"} –⁠⁠⁠⁠⁠⁠ ${
-									x.type
-								}`}
+								title={t(
+									`Components.ConnectorForm.Connector.${x.type}` as never
+								)}
 								icon={<Icon />}
-								editHref={`/user/settings/station`}
+								editHref={`/user/settings/dialog/connector?id=${x.id}&stationId=${stationId}`}
 							>
-								<span title={t("priceKwh")}>XX Kč/kWh</span>
+								<span title={t("Components.Connectors.power")}>
+									{x.power} kW
+								</span>
 								{x.needCable && (
 									<span className="flex items-center gap-1">
 										<Cable className="h-3 w-3" />
-										{t("needCable")}
+										{t("Components.Connectors.needCable")}
 									</span>
 								)}
 							</TableListItem>

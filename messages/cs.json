@@ -45,7 +45,8 @@
 			"addConnector": "Přidat konektor",
 			"noConnectors": "Žádné nabíjecí konektory",
 			"priceKwh": "Cena za KWh",
-			"needCable": "Potřeba vlastní kabel"
+			"needCable": "Vlastní kabel",
+			"power": "Výkon"
 		},
 		"Providers": {
 			"providers": "Veřejní provozovatelé",

@@ -45,7 +45,8 @@
 			"addConnector": "Add connector",
 			"noConnectors": "No charging connectors",
 			"priceKwh": "Price per KWh",
-			"needCable": "Need your own cable"
+			"needCable": "Need cable",
+			"power": "Performance"
 		},
 		"Providers": {
 			"providers": "Public operators",
