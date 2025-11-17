@@ -4,6 +4,7 @@ import { Edit, Trash2 } from "lucide-react"
 import { Button } from "../ui/button"
 import { cn } from "@/lib/utils"
 import { useTranslations } from "next-intl"
+import { ButtonDelete } from "./button-delete"
 
 export type TableListProps = React.ComponentProps<"div"> & {
 	count: number
@@ -47,7 +48,8 @@ export type TableListItemProps = {
 	icon?: ReactNode
 	children?: ReactNode
 	editHref?: string
-	removeHref?: string
+	actionId?: number
+	removeAction?: (actionId: number) => void
 }
 
 export function TableListItem({
@@ -55,7 +57,8 @@ export function TableListItem({
 	icon,
 	children,
 	editHref,
-	removeHref,
+	actionId,
+	removeAction,
 }: TableListItemProps) {
 	const t = useTranslations("Components.Common.TableList")
 	return (
@@ -87,15 +90,17 @@ export function TableListItem({
 						<Edit className="h-4 w-4" />
 					</ButtonLink>
 				) : null}
-				{removeHref ? (
-					<Button
+				{removeAction && actionId != undefined ? (
+					<ButtonDelete
 						variant="outline"
 						size="sm"
 						title={t("remove")}
 						className="border-red-300 text-red-700 hover:bg-red-50 dark:border-red-700 dark:text-red-300"
+						actionId={actionId}
+						action={removeAction}
 					>
 						<Trash2 className="h-4 w-4" />
-					</Button>
+					</ButtonDelete>
 				) : null}
 			</div>
 		</div>
