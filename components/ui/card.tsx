@@ -77,7 +77,7 @@ function CardHeader({
 					{btnHref && btnLabel ? (
 						<ButtonLink
 							href={btnHref}
-							className="[&>svg]:h-5 [&>svg]:w-5 [&>svg]:mr-2"
+							className="[&>svg]:h-5 [&>svg]:w-5"
 						>
 							{btnIcon}
 							{btnLabel}
