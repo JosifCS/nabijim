@@ -17,12 +17,23 @@ const schema = zfd.formData({
 		.trim(),
 	city: z.string().trim(),
 	street: z.string().trim(),
-	streetNumber: zfd.numeric(z.number().optional()),
-	houseNumber: zfd.numeric(z.number().optional()),
+	streetNumber: z.number().optional(),
+	houseNumber: z.number().optional(),
+	postalCode: z.string().min(4).trim().optional(),
+	country: z.string().trim().optional(),
 })
 export const editPrivateStation = safeAction(
 	schema,
-	async function ({ id, city, name, street, houseNumber, streetNumber }) {
+	async function ({
+		id,
+		city,
+		name,
+		street,
+		houseNumber,
+		streetNumber,
+		country,
+		postalCode,
+	}) {
 		const user = await authorize()
 		const t = await getTranslations("Actions.EditPrivateStation")
 
@@ -37,6 +48,9 @@ export const editPrivateStation = safeAction(
 							houseNumber,
 							city: city.length ? city : null,
 							street: street.length ? street : null,
+							postalCode,
+							country,
+							name,
 						},
 					},
 				},
@@ -54,6 +68,9 @@ export const editPrivateStation = safeAction(
 							houseNumber,
 							city: city.length ? city : null,
 							street: street.length ? street : null,
+							postalCode,
+							country,
+							name,
 						},
 					},
 				},

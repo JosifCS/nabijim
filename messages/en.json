@@ -62,7 +62,14 @@
 			}
 		},
 		"StationForm": {
-			"station": "Charging station"
+			"station": "Charging station",
+			"name": "Name",
+			"city": "City",
+			"street": "Street",
+			"streetNumber": "Street number",
+			"houseNumber": "House number",
+			"postalCode": "Zip code",
+			"country": "Country"
 		}
 	},
 	"Dashboard": {

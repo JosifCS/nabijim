@@ -62,7 +62,14 @@
 			}
 		},
 		"StationForm": {
-			"station": "Nabíjecí stanice"
+			"station": "Nabíjecí stanice",
+			"name": "Název",
+			"city": "Město",
+			"street": "Ulice",
+			"streetNumber": "Číslo orientační",
+			"houseNumber": "Číslo popisné",
+			"postalCode": "PSČ",
+			"country": "Stát"
 		}
 	},
 	"Dashboard": {
