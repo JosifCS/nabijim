@@ -31,3 +31,14 @@ export async function getProvider(id: number) {
 		include: {},
 	})
 }
+
+export type GetChargeTariff = Awaited<ReturnType<typeof getChargeTariff>>
+
+export async function getChargeTariff(id: number) {
+	return await prisma.chargeTariff.findFirst({
+		where: { id },
+		include: {
+			times: true,
+		},
+	})
+}
