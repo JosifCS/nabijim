@@ -10,6 +10,9 @@ export async function PrivateTariffs({ userId }: { userId: number }) {
 
 	const tariffs = await prisma.chargeTariff.findMany({
 		where: { userId },
+		include: {
+			times: true,
+		},
 	})
 
 	return (
@@ -35,7 +38,9 @@ export async function PrivateTariffs({ userId }: { userId: number }) {
 							icon={<ReceiptEuro />}
 							editHref={`/user/settings/tariff?id=${x.id}`}
 						>
-							<span title={`t("priceKwh")`}>XX Kč/kWh</span>
+							<span title={`t("priceKwh")`}>
+								{x.times.at(0)?.price ?? 0} Kč/kWh
+							</span>
 						</TableListItem>
 					))}
 				</TableList>

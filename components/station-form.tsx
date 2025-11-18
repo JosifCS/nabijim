@@ -28,6 +28,7 @@ export async function StationForm({ stationId }: { stationId: number | null }) {
 			/>
 			<CardContent>
 				<Form action={editPrivateStation}>
+					<input name="id" defaultValue={Number(stationId)} hidden />
 					<FormInput
 						type="text"
 						name="name"
