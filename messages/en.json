@@ -95,10 +95,18 @@
 			"needCableDesc": "The charging point is not equipped with a cable."
 		},
 		"PrivateTariffs": {
-			"tariffs": "Private pricing plans",
+			"tariffs": "Private electricity tariffs",
 			"tariffsDescription": "Add your home electricity tariff and other private tariffs.",
 			"addTariff": "Add tariff",
 			"noTariffs": "No tariffs"
+		},
+		"TariffCard": {
+			"tariff": "Electricity tariff",
+			"tariffDesc": "Prices for electricity supplies",
+			"name": "Name",
+			"validFrom": "Valid from",
+			"validTo": "Valid until",
+			"price": "Price per kWh"
 		}
 	},
 	"Dashboard": {
@@ -145,6 +153,10 @@
 		"EditConnector": {
 			"saved": "Changes saved",
 			"created": "Connector created"
+		},
+		"EditChargeTariff": {
+			"saved": "Saved",
+			"created": "Created"
 		}
 	}
 }

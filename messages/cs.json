@@ -95,10 +95,18 @@
 			"needCableDesc": "Nabíjecí místo není vybaveno kabelem."
 		},
 		"PrivateTariffs": {
-			"tariffs": "Soukromé tarify cen",
+			"tariffs": "Soukromé tarify za elektřinu",
 			"tariffsDescription": "Přidejte svůj domací tarif za elektřinu a další soukromé tarify.",
 			"addTariff": "Přidat tarif",
 			"noTariffs": "Žádné tarify"
+		},
+		"TariffCard": {
+			"tariff": "Tarif za elekřinu",
+			"tariffDesc": "Ceny za dodávky elektřiny",
+			"name": "Název",
+			"validFrom": "Platné od",
+			"validTo": "Platné do",
+			"price": "Cena za kWh"
 		}
 	},
 	"Dashboard": {
@@ -145,6 +153,10 @@
 		"EditConnector": {
 			"saved": "Změny uloženy",
 			"created": "Konektor vytvořen"
+		},
+		"EditChargeTariff": {
+			"saved": "Uloženo",
+			"created": "Vytvořeno"
 		}
 	}
 }
