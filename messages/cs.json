@@ -107,6 +107,18 @@
 			"validFrom": "Platné od",
 			"validTo": "Platné do",
 			"price": "Cena za kWh"
+		},
+		"ProviderCard": {
+			"provider": "Poskytoval veřejného nabíjení",
+			"providerDesc": "Inforamce o poskytovali veřejného dobíjení",
+			"name": "Název",
+			"description": "Popis",
+			"email": "Email",
+			"phoneNumber": "Telefonní číslo",
+			"importUrl": "URL s JSON daty pro import stanic",
+			"importSchema": "Formát JSON souboru",
+			"url": "URL",
+			"import": "Importovat data"
 		}
 	},
 	"Dashboard": {

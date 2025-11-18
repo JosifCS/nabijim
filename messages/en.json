@@ -107,6 +107,18 @@
 			"validFrom": "Valid from",
 			"validTo": "Valid until",
 			"price": "Price per kWh"
+		},
+		"ProviderCard": {
+			"provider": "Provided public charging",
+			"providerDesc": "Information about public charging providers",
+			"name": "Name",
+			"description": "Description",
+			"email": "E-mail",
+			"phoneNumber": "Telephone number",
+			"importUrl": "URL with JSON data for importing stations",
+			"importSchema": "JSON file format",
+			"url": "URL",
+			"import": "Import data"
 		}
 	},
 	"Dashboard": {
