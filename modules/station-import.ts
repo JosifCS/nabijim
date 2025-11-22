@@ -40,10 +40,11 @@ export class StationImport {
 			)
 		}
 
+		let imp: StationImportProvider
 		switch (provider.importSchema) {
 			case "cez-2025":
 				if (isProviderCez2025Scheme(data))
-					await this.providerCez2025Scheme(data)
+					imp = new StationImportCez2025(this.providerId, data)
 				else
 					throw new Error(
 						`Station download error, invalid data for scheme: ${provider.importSchema}`
@@ -54,30 +55,66 @@ export class StationImport {
 					`Station download error, invalid scheme type: ${provider.importSchema}`
 				)
 		}
+
+		imp.run()
 	}
 
-	private async providerCez2025Scheme(stations: ProviderCez2025Scheme) {
-		const connectorTranslate: Record<
-			ProviderCez2025Scheme[0]["evses"][0]["connectors"][0]["standard"],
-			ConnectorType
-		> = {
-			CCS_COMBO: "CCS2",
-			CHADEMO: "CHADEMO",
-			MENNEKES_TYPE_2: "TYPE_2",
+	private static async fetchScheme(url: string) {
+		let resp: Response
+		try {
+			resp = await fetch(url)
+		} catch (e) {
+			throw new Error(
+				`Station import fetch error: ${(e as Error).message}`
+			)
 		}
 
-		await this.deactivateRemovedStations(stations)
+		if (!resp.ok)
+			throw new Error(`Station import fetch KO status: ${resp.status}`)
+
+		return resp
+	}
+}
+
+abstract class StationImportProvider<T = unknown> {
+	protected data: T
+	protected providerId: number
+	protected abstract CONNECTORS: Record<
+		Cez2025Scheme[0]["evses"][0]["connectors"][0]["standard"],
+		ConnectorType
+	>
+
+	constructor(providerId: number, data: T) {
+		this.data = data
+		this.providerId = providerId
+	}
+
+	abstract run(): Promise<void>
+}
+
+class StationImportCez2025 extends StationImportProvider<Cez2025Scheme> {
+	protected CONNECTORS: Record<
+		Cez2025Scheme[0]["evses"][0]["connectors"][0]["standard"],
+		ConnectorType
+	> = {
+		CCS_COMBO: "CCS2",
+		CHADEMO: "CHADEMO",
+		MENNEKES_TYPE_2: "TYPE_2",
+	}
+
+	constructor(providerId: number, data: Cez2025Scheme) {
+		super(providerId, data)
+	}
+
+	public async run() {
+		await this.deactivateRemovedStations(this.data)
 
 		// stanice zařadit do hubu podle stejné adresy, nebo podle stejných souřadnic
-		for (const station of stations) {
-			let hub = await StationImport.findExitingHub(station)
-			if (hub == null) hub = await StationImport.newHub(station)
+		for (const station of this.data) {
+			let hub = await this.findExitingHub(station)
+			if (hub == null) hub = await this.newHub(station)
 
-			const dbStation = await StationImport.createOrUpdateStation(
-				station,
-				this.providerId,
-				hub.id
-			)
+			const dbStation = await this.createOrUpdateStation(station, hub.id)
 
 			await this.deactivateRemovedConnectors(dbStation.id, station.evses)
 
@@ -89,7 +126,7 @@ export class StationImport {
 							3 ** (1 / 2) *
 								(connector.voltage ?? 0) *
 								(connector.amperage ?? 0),
-						type = connectorTranslate[connector.standard]
+						type = this.CONNECTORS[connector.standard]
 
 					const dbConnector = await prisma.connector.findFirst({
 						where: {
@@ -121,7 +158,7 @@ export class StationImport {
 		}
 	}
 
-	private async deactivateRemovedStations(stations: ProviderCez2025Scheme) {
+	private async deactivateRemovedStations(stations: Cez2025Scheme) {
 		const newCustomIds = stations.map((x) => x.customID)
 		const existingStations = await prisma.publicStation.findMany({
 			where: { providerId: this.providerId },
@@ -140,7 +177,7 @@ export class StationImport {
 
 	private async deactivateRemovedConnectors(
 		stationId: number,
-		evses: ProviderCez2025Scheme[0]["evses"]
+		evses: Cez2025Scheme[0]["evses"]
 	) {
 		const newConnectorIds = evses
 			.map((x) => x.connectors.map((x) => x.connectorID))
@@ -162,7 +199,7 @@ export class StationImport {
 		})
 	}
 
-	private static async newHub(station: ProviderCez2025Scheme[0]) {
+	private async newHub(station: Cez2025Scheme[0]) {
 		return await prisma.chargingHub.create({
 			data: {
 				city: station.address.city,
@@ -182,9 +219,8 @@ export class StationImport {
 		})
 	}
 
-	private static async createOrUpdateStation(
-		station: ProviderCez2025Scheme[0],
-		providerId: number,
+	private async createOrUpdateStation(
+		station: Cez2025Scheme[0],
 		hubId: number
 	) {
 		let dbStation = await prisma.station.findFirst({
@@ -207,7 +243,7 @@ export class StationImport {
 						create: {
 							customId: station.customID,
 							imageUrl: station.images.at(0)?.imageUrl,
-							providerId: providerId,
+							providerId: this.providerId,
 						},
 					},
 				},
@@ -232,12 +268,12 @@ export class StationImport {
 							create: {
 								customId: station.customID,
 								imageUrl: station.images.at(0)?.imageUrl,
-								providerId: providerId,
+								providerId: this.providerId,
 							},
 							update: {
 								customId: station.customID,
 								imageUrl: station.images.at(0)?.imageUrl,
-								providerId: providerId,
+								providerId: this.providerId,
 							},
 						},
 					},
@@ -258,7 +294,7 @@ export class StationImport {
 		return dbStation
 	}
 
-	private static async findExitingHub(station: ProviderCez2025Scheme[0]) {
+	private async findExitingHub(station: Cez2025Scheme[0]) {
 		return await prisma.chargingHub.findFirst({
 			where: {
 				OR: [
@@ -292,29 +328,13 @@ export class StationImport {
 			select: { id: true },
 		})
 	}
-
-	private static async fetchScheme(url: string) {
-		let resp: Response
-		try {
-			resp = await fetch(url)
-		} catch (e) {
-			throw new Error(
-				`Station import fetch error: ${(e as Error).message}`
-			)
-		}
-
-		if (!resp.ok)
-			throw new Error(`Station import fetch KO status: ${resp.status}`)
-
-		return resp
-	}
 }
 
 export const ProviderDataSchemes = ["cez-2025"] as const
 
 export type ProviderDataScheme = (typeof ProviderDataSchemes)[number]
 
-function isProviderCez2025Scheme(obj: unknown): obj is ProviderCez2025Scheme {
+function isProviderCez2025Scheme(obj: unknown): obj is Cez2025Scheme {
 	return (
 		Array.isArray(obj) &&
 		typeof obj[0] === "object" &&
@@ -357,7 +377,7 @@ function isProviderCez2025Scheme(obj: unknown): obj is ProviderCez2025Scheme {
 	)
 }
 
-export type ProviderCez2025Scheme = {
+type Cez2025Scheme = {
 	name: string
 	visible: boolean
 	customID: string
