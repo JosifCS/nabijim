@@ -76,6 +76,7 @@ model ChargingHub {
   stations     Station[]
   latitude     Float?
 	longitude    Float?
+  available    Boolean @default(true)
 
   @@map("chargingHubs")
 }
@@ -91,6 +92,7 @@ model Station {
   publicId        Int? 
   private         PrivateStation? @relation("StationPrivateStation")
   privateId       Int?
+  available       Boolean @default(true)
 
   @@map("stations")
 }
@@ -128,6 +130,7 @@ model Connector {
   station         Station @relation(fields: [stationId], references: [id])
   stationId       Int
   tariffs         ChargeTariff[]
+  available       Boolean @default(true)
 
   @@map("connectors")
 }
