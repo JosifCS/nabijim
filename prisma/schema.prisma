@@ -122,6 +122,7 @@ model PrivateStation {
 
 model Connector {
   id              Int @id @default(autoincrement())
+  customId        String?
   dc              Boolean
   type            String
   power           Int
