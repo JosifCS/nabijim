@@ -45,8 +45,7 @@ model ChargeSession {
   id          Int  @id @default(autoincrement())
   user        User @relation(fields: [userId], references: [id])
   userId      Int
-  connector Connector @relation(fields: [stationId, connectorId], references: [stationId, id])
-  stationId   Int
+  connector   Connector @relation(fields: [connectorId], references: [id])
   connectorId Int
   provider    Provider @relation(fields: [providerId], references: [id])
   providerId  Int
@@ -122,7 +121,7 @@ model PrivateStation {
 }
 
 model Connector {
-  id              Int @default(autoincrement())
+  id              Int @id @default(autoincrement())
   dc              Boolean
   type            String
   power           Int
@@ -133,7 +132,6 @@ model Connector {
   tariffs         ChargeTariff[]
   available       Boolean @default(true)
 
-  @@id([id, stationId])
   @@map("connectors")
 }
 
@@ -145,9 +143,7 @@ model ChargeTariff {
   validFrom  DateTime
   validTo    DateTime?
   times      TariffTime[]
-  connector Connector @relation(fields: [stationId, connectorId], references: [stationId, id])
-  stationId   Int
-  connectorId Int
+  connectors Connector[]
 
   @@map("chargeTariffs")
 }
