@@ -29,7 +29,8 @@
 			"localeSelect": "Výběr jazyka",
 			"settings": "Nastavení",
 			"myAccount": "Můj účet",
-			"administration": "Administrace"
+			"administration": "Administrace",
+			"newCharge": "Nové nabíjení"
 		},
 		"PrivateStations": {
 			"chargeDescription": "Přidejte svou domací nabíjecí stanici a další soukromé stanice.",

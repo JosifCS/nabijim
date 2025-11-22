@@ -18,7 +18,12 @@ export function UserMenu({
 	isAdmin,
 }: {
 	messages: Record<
-		"logout" | "userName" | "myAccount" | "settings" | "administration",
+		| "logout"
+		| "userName"
+		| "myAccount"
+		| "settings"
+		| "administration"
+		| "newCharge",
 		string
 	>
 	isAdmin: boolean
@@ -37,17 +42,22 @@ export function UserMenu({
 				<DropdownMenuLabel>{messages.myAccount}</DropdownMenuLabel>
 				<DropdownMenuGroup>
 					<DropdownMenuItem asChild>
+						<Link href="/dashboard/dialog/new-charge">
+							{messages.newCharge}
+						</Link>
+					</DropdownMenuItem>
+					<DropdownMenuItem asChild>
 						<Link href="/user/settings">{messages.settings}</Link>
 					</DropdownMenuItem>
-					{isAdmin && (
-						<DropdownMenuItem asChild>
-							<Link href="/administration">
-								{messages.administration}
-							</Link>
-						</DropdownMenuItem>
-					)}
 				</DropdownMenuGroup>
 				<DropdownMenuSeparator />
+				{isAdmin && (
+					<DropdownMenuItem asChild>
+						<Link href="/administration">
+							{messages.administration}
+						</Link>
+					</DropdownMenuItem>
+				)}
 				<DropdownMenuItem asChild>
 					<Link href="/auth/logout">{messages.logout}</Link>
 				</DropdownMenuItem>

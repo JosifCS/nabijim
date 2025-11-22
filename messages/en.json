@@ -29,7 +29,8 @@
 			"localeSelect": "Language selection",
 			"settings": "Settings",
 			"myAccount": "My account",
-			"administration": "Administration"
+			"administration": "Administration",
+			"newCharge": "New charging"
 		},
 		"PrivateStations": {
 			"chargeDescription": "Add your home charging station and other private stations.",

@@ -9,10 +9,16 @@ export const metadata: Metadata = {
 
 export default async function Layout({
 	children,
-}: Readonly<{
+	dialogs,
+}: {
 	children: ReactNode
-}>) {
+	dialogs: ReactNode
+}) {
 	await authorize()
 
-	return <>{children}</>
+	return (
+		<>
+			{children} {dialogs}
+		</>
+	)
 }

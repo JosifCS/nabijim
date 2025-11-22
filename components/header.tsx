@@ -42,6 +42,7 @@ export async function Header() {
 									myAccount: t("myAccount"),
 									settings: t("settings"),
 									administration: t("administration"),
+									newCharge: t("newCharge"),
 								}}
 							/>
 						) : (
