@@ -8,6 +8,9 @@ import { getProvider } from "@/modules/queries"
 import { EMPTY_PROVIDER } from "@/modules/empty-data"
 import { editProvider } from "@/actions/edit-provider"
 import { Button } from "./ui/button"
+import { ProviderDataSchemes } from "@/modules/station-import"
+import { ButtonData } from "./button-data"
+import { importStations } from "@/actions/import-stations"
 
 export async function ProviderCard({
 	providerId,
@@ -67,12 +70,19 @@ export async function ProviderCard({
 					<FormSelect
 						name="importSchema"
 						label={t("importSchema")}
-						options={[{ value: "cez-2025" }]}
+						options={ProviderDataSchemes.map((value) => ({
+							value,
+						}))}
 						defaultValue={provider.importSchema ?? undefined}
 					/>
 				</Form>
 
-				{providerId && <Button>{t("import")}</Button>}
+				{provider.importSchema != null &&
+					provider.importUrl != null && (
+						<ButtonData data={providerId!} onClick={importStations}>
+							{t("import")}
+						</ButtonData>
+					)}
 			</CardContent>
 		</Card>
 	)
