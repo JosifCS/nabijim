@@ -8,6 +8,7 @@ export const EMPTY_PRIVATE_STATION: GetPrivateStation = {
 	name: String.Empty,
 	chargingHubId: 0,
 	// connectors: [],
+	available: true,
 	chargingHub: {
 		id: 0,
 		email: null,
@@ -22,6 +23,7 @@ export const EMPTY_PRIVATE_STATION: GetPrivateStation = {
 		url: null,
 		latitude: null,
 		longitude: null,
+		available: true,
 	},
 }
 
@@ -44,4 +46,6 @@ export const EMPTY_CONNECTOR: GetConnector = {
 	stationId: 0,
 	tariffs: [],
 	type: "TYPE_2",
+	available: true,
+	customId: null,
 }
